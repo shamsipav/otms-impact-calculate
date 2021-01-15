@@ -28,19 +28,29 @@ namespace ImpactCalculateWebApplication.Controllers
 
 
         [HttpPost]
-        public IActionResult Index(List<InputDataModel> input)
+        public IActionResult Index(List<InputDataModel> input, Cocks selectedCocks, double L1, double L2, double S1, double S2, double Wgr)
         {
             db.Inputs.RemoveRange(db.Inputs);
+            db.Results.RemoveRange(db.Results);
 
-            db.Inputs.AddRange(input);           
+            IndexViewModel viewModel = new IndexViewModel(input);
+
+            viewModel.selectedCocks = CocksModel.Kemerovo_3_4;
+
+            viewModel.L1 = L1;
+            viewModel.L2 = L2;
+            viewModel.S1 = S1;
+            viewModel.S2 = S2;
+            viewModel.Wgr = Wgr;
+
+            viewModel.CalculateResults();
+
+            db.Inputs.AddRange(input);
+            db.Results.AddRange(viewModel.Results);
 
             db.SaveChanges();
 
             IndexViewModel.LastID = input[input.Count - 1].ID;
-
-            IndexViewModel viewModel = new IndexViewModel(input);
-
-            viewModel.CalculateResults();
 
             return View("Result", viewModel);
         }
