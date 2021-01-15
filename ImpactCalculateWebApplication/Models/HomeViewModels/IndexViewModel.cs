@@ -26,11 +26,11 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         public double V0 { get { return L0 + DeltaV; } }
 
         //Averages:
-        public double AverageGabbro { get { return Results.Select(x => x.materialBalance.Gabbro).Sum() / Results.Count; } }
-        public double AverageLimestone { get { return Results.Select(x => x.materialBalance.Limestone).Sum() / Results.Count; } }
-        public double Average_M_Limestone { get { return Results.Select(x => x.materialBalance.M_Limestone).Sum() / Results.Count; } }
-        public double AverageCocks { get { return Results.Select(x => x.materialBalance.Cocks).Sum() / Results.Count; } }
-        public double AverageGas { get { return Results.Select(x => x.materialBalance.Gas).Sum() / Results.Count; } }
+        public double AverageGabbro { get { return Results.Select(x => x.MaterialBalance_Gabbro).Sum() / Results.Count; } }
+        public double AverageLimestone { get { return Results.Select(x => x.MaterialBalance_Limestone).Sum() / Results.Count; } }
+        public double Average_M_Limestone { get { return Results.Select(x => x.MaterialBalance_M_Limestone).Sum() / Results.Count; } }
+        public double AverageCocks { get { return Results.Select(x => x.MaterialBalance_Cocks).Sum() / Results.Count; } }
+        public double AverageGas { get { return Results.Select(x => x.MaterialBalance_Gas).Sum() / Results.Count; } }
         //-----
         public double AverageSiO2 { get { return Inputs.Select(x => x.SiO2).Sum() / Inputs.Count; } }
         public double AverageAl2O3 { get { return Inputs.Select(x => x.Al2O3).Sum() / Inputs.Count; } }
@@ -71,10 +71,10 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         {
             var result = new ResultDataModel();
 
-            result.Gas = CalcGas(input);
-            result.Device = CalcDevice(input);
-            result.Waste_Difference = result.Gas.V_Waste - result.Device.V_Waste;
-            result.La = result.Device.A * L0;
+            CalcGas(input, result);
+            CalcDevice(input, result);
+            result.Waste_Difference = result.Gas_V_Waste - result.Device_V_Waste;
+            result.La = result.Device_A * L0;
 
             //Q-шки
             result.qCO = -0.0000000165d * Math.Pow(input.Smoke_Temperature, 3) + 0.0000120241d * Math.Pow(input.Smoke_Temperature, 2)
@@ -87,9 +87,19 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
             result.qSum = result.qCO + result.qCO2 + result.qN2 + result.qO2;
             //------------------
 
-            result.materialBalance = CalcMaterialBalance(input, result);
+            CalcMaterialBalance(input, result);
 
-            result.materialBalanceOnTonOfSmelt = CalcMaterialBalanceOnTonOfSmelt(input, result);
+            CalcMaterialBalanceOnTonOfSmelt(input, result);
+
+            //W-шки
+            result.W_m = (input.Cocks * result.MaterialBalance_Cocks * 1.008d +
+                          input.Gabbro * result.MaterialBalance_Gabbro * 0.468d +
+                          input.Limestone * result.MaterialBalance_Limestone * 1.34d +
+                          input.M_Limestone * result.MaterialBalance_M_Limestone * 1.34d) / 100d;
+
+            result.W_g = result.TeploBalance_OutputGas * 3600d / input.Smoke_Temperature;
+            result.W_m_g = result.W_m / result.W_g;
+            //------------------
 
             result.ID = input.ID;
 
@@ -97,89 +107,63 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         }
 
         //РАСЧЕТ ГАЗА И ПРИБОРА
-        public A_AV_VW CalcGas(InputDataModel input)
+        public void CalcGas(InputDataModel input, ResultDataModel result)
         {
             double _A = 1f / (1f - 3.76f * (input.O2_Percentage - 0.5f * input.CO_Percentage) / input.N2_Percentage);
             double _V_Alpha = L0 * _A + DeltaV;
             double _V_Waste = input.Cocks * ((12d / 22.4d) * input.CO_Percentage + (12d / 22.4d) * input.CO2_Percentage);
            
-            A_AV_VW gas = new A_AV_VW()
-            {
-                A = _A,
-                V_Alpha = _V_Alpha,
-                V_Waste = _V_Waste,
-                ID = input.ID
-            };
-
-            return gas;
+            result.Gas_A = _A;
+            result.Gas_V_Alpha = _V_Alpha;
+            result.Gas_V_Waste = _V_Waste;
         }
-        public A_AV_VW CalcDevice(InputDataModel input)
+        public void CalcDevice(InputDataModel input, ResultDataModel result)
         {
             double _A = input.Air_Spend / (input.Cocks * L0);
             double _V_Alpha = L0 * _A + DeltaV;
             double _V_Waste = input.Cocks * _V_Alpha;
-           
-            A_AV_VW device = new A_AV_VW()
-            {
-                A = _A,
-                V_Alpha = _V_Alpha,
-                V_Waste = _V_Waste,
-                ID = input.ID
-            };
 
-            return device;
+            result.Device_A = _A;
+            result.Device_V_Alpha = _V_Alpha;
+            result.Device_V_Waste = _V_Waste;
         }
 
         //МАТЕРИАЛЬНЫЙ БАЛАНС
-        public MaterialBalance CalcMaterialBalance(InputDataModel input, ResultDataModel result)
+        public void CalcMaterialBalance(InputDataModel input, ResultDataModel result)
         {
-            double OutputGas = result.Gas.V_Waste * result.qSum;
+            double OutputGas = result.Gas_V_Waste * result.qSum;
             double Dust = (input.Cocks + input.Gabbro + input.Limestone) * 0.03d;
             double Smelt = input.MaterialSum - OutputGas - Dust;
-
             double WasteSum = Smelt + Dust + OutputGas;
 
-            MaterialBalance mb = new MaterialBalance()
-            {
-                Cocks = input.Cocks / input.MaterialSum * 100,
-                Gabbro = input.Cocks / input.MaterialSum * 100,
-                Limestone = input.Cocks / input.MaterialSum * 100,
-                M_Limestone = input.Cocks / input.MaterialSum * 100,
-                Gas = input.Cocks / input.MaterialSum * 100,
+            result.MaterialBalance_Cocks = input.Cocks / input.MaterialSum * 100;
+            result.MaterialBalance_Gabbro = input.Cocks / input.MaterialSum * 100;
+            result.MaterialBalance_Limestone = input.Cocks / input.MaterialSum * 100;
+            result.MaterialBalance_M_Limestone = input.Cocks / input.MaterialSum * 100;
+            result.MaterialBalance_Gas = input.Cocks / input.MaterialSum * 100;
 
-                ID = input.ID,
-
-                Smelt = Smelt,
-                OutputGas = OutputGas,
-                Dust = Dust,
-                WasteSum = WasteSum
-
-            };
-            return mb;
+            result.MaterialBalance_Smelt = Smelt;
+            result.MaterialBalance_OutputGas = OutputGas;
+            result.MaterialBalance_Dust = Dust;
+            result.MaterialBalance_WasteSum = WasteSum;
         }
-        public MaterialBalanceOnTonOfSmelt CalcMaterialBalanceOnTonOfSmelt(InputDataModel input, ResultDataModel result)
+        public void CalcMaterialBalanceOnTonOfSmelt(InputDataModel input, ResultDataModel result)
         {
-            MaterialBalanceOnTonOfSmelt mb = new MaterialBalanceOnTonOfSmelt()
-            {
-                Cocks = result.materialBalance.Cocks * 1000 / result.materialBalance.Smelt,
-                Gabbro = result.materialBalance.Gabbro * 1000 / result.materialBalance.Smelt,
-                Limestone = result.materialBalance.Limestone * 1000 / result.materialBalance.Smelt,
-                M_Limestone = result.materialBalance.M_Limestone * 1000 / result.materialBalance.Smelt,
-                Gas = result.materialBalance.Gas * 1000 / result.materialBalance.Smelt,
+            result.MaterialBalanceOnTonOfSmelt_Cocks = result.MaterialBalance_Cocks * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_Gabbro = result.MaterialBalance_Gabbro * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_Limestone = result.MaterialBalance_Limestone * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_M_Limestone = result.MaterialBalance_M_Limestone * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_Gas = result.MaterialBalance_Gas * 1000 / result.MaterialBalance_Smelt;
 
-                ID = input.ID,
+            result.MaterialBalanceOnTonOfSmelt_Smelt = result.MaterialBalance_Smelt * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_OutputGas = result.MaterialBalance_OutputGas * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_Dust = result.MaterialBalance_Dust * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_WasteSum = result.MaterialBalance_WasteSum * 1000 / result.MaterialBalance_Smelt;
 
-                Smelt = result.materialBalance.Smelt * 1000 / result.materialBalance.Smelt,
-                OutputGas = result.materialBalance.OutputGas * 1000 / result.materialBalance.Smelt,
-                Dust = result.materialBalance.Dust * 1000 / result.materialBalance.Smelt,
-                WasteSum = result.materialBalance.WasteSum * 1000 / result.materialBalance.Smelt,
-
-            };
-            return mb;
         }
 
         //ТЕПЛОВОЙ БАЛАНС
-        public TeploBalance CalcTeploBalance(InputDataModel input, ResultDataModel result)
+        public void CalcTeploBalance(InputDataModel input, ResultDataModel result)
         {
             var Gas = 33500d * input.Gas / 3600d;
             var Cocks = input.Cocks * Cocks_Combustion_Temperature / 3600d;
@@ -188,14 +172,14 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
             var SumPlus = Gas + Cocks + Air;
 
 
-            var MeltGeneration = result.materialBalance.Smelt * input.Melt_Temperature *
-               (AverageSiO2 * (0.00007d * input.Melt_Temperature + 1.1296d) +
-                AverageAl2O3 * (0.0002d * input.Melt_Temperature + 1.0934d) +
-                AverageCaO * (0.00009d * input.Melt_Temperature + 0.8804d) +
-                AverageMgO * (0.0001d * input.Melt_Temperature + 1.2024d) +
-                AverageFeO * (0.0001d * input.Melt_Temperature + 0.7232d)) / 3600d;
+            var MeltGeneration = result.MaterialBalance_Smelt * input.Smelt_Temperature *
+               (AverageSiO2 * (0.00007d * input.Smelt_Temperature + 1.1296d) +
+                AverageAl2O3 * (0.0002d * input.Smelt_Temperature + 1.0934d) +
+                AverageCaO * (0.00009d * input.Smelt_Temperature + 0.8804d) +
+                AverageMgO * (0.0001d * input.Smelt_Temperature + 1.2024d) +
+                AverageFeO * (0.0001d * input.Smelt_Temperature + 0.7232d)) / 3600d;
 
-            var OutputGas = result.Device.V_Waste * input.Smoke_Temperature * (input.CO_Percentage *
+            var OutputGas = result.Device_V_Waste * input.Smoke_Temperature * (input.CO_Percentage *
                 (0.0000001d * input.Smoke_Temperature * input.Smoke_Temperature + 0.00005d * input.Smoke_Temperature + 1.2979) / 100d + input.CO2_Percentage *
                 (0.0000005d * input.Smoke_Temperature * input.Smoke_Temperature + 0.001d * input.Smoke_Temperature + 1.6016d) / 100d + 0.0125d *
                 (0.00000003d * input.Smoke_Temperature * input.Smoke_Temperature + 0.0002d * input.Smoke_Temperature + 1.301d) + input.N2_Percentage *
@@ -208,45 +192,65 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
                 0.1077d * (0.0001d * input.Smoke_Temperature + 1.2024d) +
                 0.0345d * (0.0001d * input.Smoke_Temperature + 0.7232d)) / 3600d;
 
-            var ChemistryUnderburning = result.Device.V_Waste * input.CO_Percentage * 127.7d / 3600d;
+            var ChemistryUnderburning = result.Device_V_Waste * input.CO_Percentage * 127.7d / 3600d;
 
-            var CoolingWater = 1549.87427778d;
+            var CoolingWater = input.AverageWaterSteamTemperature * (input.InputWaterWaste * 4.2023d - input.OutputWaterWaste * 4.1934d) * 1000d / 3600d;
 
 
             var Endoterm_Reactions = SumPlus - MeltGeneration - OutputGas - Dust - ChemistryUnderburning - CoolingWater;
 
             var SumWaste = Endoterm_Reactions + CoolingWater + ChemistryUnderburning + Dust + OutputGas + MeltGeneration;
 
-            TeploBalance tb = new TeploBalance()
-            {
-                Gas = Gas,
-                Cocks = Cocks,
-                Air = Air,
-                SumPlus = SumPlus,
 
-                ID = input.ID,
+            result.TeploBalance_Gas = Gas;
+            result.TeploBalance_Cocks = Cocks;
+            result.TeploBalance_Air = Air;
+            result.TeploBalance_SumPlus = SumPlus;
 
-                MeltGeneration= MeltGeneration,
-                OutputGas=OutputGas,
-                Dust=Dust,
 
-                ChemistryUnderburning=ChemistryUnderburning,
-                Endoterm_Reactions=Endoterm_Reactions,
-                CoolingWater=CoolingWater,
-                SumWaste=SumWaste,
-            };
-            return tb;
+            result.TeploBalance_MeltGeneration = MeltGeneration;
+            result.TeploBalance_OutputGas = OutputGas;
+            result.TeploBalance_Dust = Dust;
+
+            result.TeploBalance_ChemistryUnderburning = ChemistryUnderburning;
+            result.TeploBalance_Endoterm_Reactions = Endoterm_Reactions;
+            result.TeploBalance_CoolingWater = CoolingWater;
+            result.TeploBalance_SumWaste = SumWaste;
+            
         }
-        public TeploBalanceOnTonOfSmelt CalcTeploBalanceOnTonOfSmelt(InputDataModel input, ResultDataModel result)
+        public void CalcTeploBalanceOnTonOfSmelt(InputDataModel input, ResultDataModel result)
         {
+            var Gas = result.TeploBalance_Gas * 1000 / result.MaterialBalance_Smelt;
+            var Cocks = result.TeploBalance_Cocks * 1000 / result.MaterialBalance_Smelt;
+            var Air = result.TeploBalance_Air * 1000 / result.MaterialBalance_Smelt;
+
+            var SumPlus = Gas + Cocks + Air;
 
 
-            TeploBalanceOnTonOfSmelt tb = new TeploBalanceOnTonOfSmelt()
-            {
-             //   = result.teploBalance.Gas * 1000 / B129
+            var MeltGeneration = result.TeploBalance_MeltGeneration * 1000 / result.MaterialBalance_Smelt;
+            var OutputGas = result.TeploBalance_OutputGas * 1000 / result.MaterialBalance_Smelt;
+            var Dust = result.TeploBalance_Dust * 1000 / result.MaterialBalance_Smelt;
+            var ChemistryUnderburning = result.TeploBalance_ChemistryUnderburning * 1000 / result.MaterialBalance_Smelt;
+            var CoolingWater = result.TeploBalance_CoolingWater * 1000 / result.MaterialBalance_Smelt;
+            var Endoterm_Reactions = result.TeploBalance_Endoterm_Reactions * 1000 / result.MaterialBalance_Smelt;
 
-            };
-            return tb;
+            var SumWaste = MeltGeneration + OutputGas + Dust + ChemistryUnderburning + CoolingWater + Endoterm_Reactions;
+
+
+            result.TeploBalanceOnTonOfSmelt_Gas = Gas;
+            result.TeploBalanceOnTonOfSmelt_Cocks = Cocks;
+            result.TeploBalanceOnTonOfSmelt_Air = Air;
+            result.TeploBalanceOnTonOfSmelt_SumPlus = SumPlus;
+
+
+            result.TeploBalanceOnTonOfSmelt_MeltGeneration = MeltGeneration;
+            result.TeploBalanceOnTonOfSmelt_OutputGas = OutputGas;
+            result.TeploBalanceOnTonOfSmelt_Dust = Dust;
+
+            result.TeploBalanceOnTonOfSmelt_ChemistryUnderburning = ChemistryUnderburning;
+            result.TeploBalanceOnTonOfSmelt_Endoterm_Reactions = Endoterm_Reactions;
+            result.TeploBalanceOnTonOfSmelt_CoolingWater = CoolingWater;
+            result.TeploBalanceOnTonOfSmelt_SumWaste = SumWaste;
         }
     }
 }

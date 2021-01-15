@@ -30,12 +30,19 @@ namespace ImpactCalculateWebApplication.Models
         //---------------------------------------------
 
 
+        //Cooling Water Parametres
+        public double InputWaterWaste { get; set; }
+        public double OutputWaterWaste { get; set; }
+        public double AverageWaterSteamTemperature { get; set; }
+        //---------------------------------------------
+
+
         public double Air_Spend { get; set; }
         public double Air_Pressure { get; set; }
         public double Air_Temperature { get; set; }
         public double Smoke_Temperature { get; set; }
         public double Viscosity { get; set; }
-        public double Melt_Temperature { get; set; }
+        public double Smelt_Temperature { get; set; }
         public double CO_Percentage { get; set; }
         public double CO2_Percentage { get; set; }
         public double N2_Percentage { get; set; }
@@ -50,7 +57,7 @@ namespace ImpactCalculateWebApplication.Models
                 Air_Temperature = 610.2,
                 Smoke_Temperature = 146.5,
                 Viscosity = 22,
-                Melt_Temperature = 1521,
+                Smelt_Temperature = 1521,
                 CO_Percentage = 8.7,
                 CO2_Percentage = 12.4,
                 N2_Percentage = 77.67,

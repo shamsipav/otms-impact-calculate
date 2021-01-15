@@ -19,12 +19,11 @@ namespace ImpactCalculateWebApplication.Models
         public double Device_V_Alpha { get; set; }
         public double Device_V_Waste { get; set; }
 
-
+        //--------------------------------------------
         public double Waste_Difference { get; set; }
         public double La { get; set; }
 
         //Балансы:
-
         #region Материальный Баланс
         //Приход
         public double MaterialBalance_Gabbro { get; set; }
@@ -89,12 +88,19 @@ namespace ImpactCalculateWebApplication.Models
         public double TeploBalanceOnTonOfSmelt_SumWaste { get; set; }
         #endregion Тепловой Баланс На Тонну Расплава
 
-
+        //Q-шки
         public double qCO{get;set;}
         public double qCO2 { get; set; }
         public double qO2 { get; set; }
         public double qN2 { get; set; }
         public double qSum { get; set; }
+        //-----------------------------------
+
+        //W-шки
+        public double W_m { get; set; }
+        public double W_g { get; set; }
+        public double W_m_g { get; set; }
+        //-----------------------------------
 
 
     }
