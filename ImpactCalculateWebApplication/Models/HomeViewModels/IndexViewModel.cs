@@ -32,11 +32,11 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         public double AverageCocks { get { return Results.Select(x => x.materialBalance.Cocks).Sum() / Results.Count; } }
         public double AverageGas { get { return Results.Select(x => x.materialBalance.Gas).Sum() / Results.Count; } }
         //-----
-        public double AverageSiO2 { get { return Inputs.Select(x => x.oxidPercent.SiO2).Sum() / Inputs.Count; } }
-        public double AverageAl2O3 { get { return Inputs.Select(x => x.oxidPercent.Al2O3).Sum() / Inputs.Count; } }
-        public double AverageCaO { get { return Inputs.Select(x => x.oxidPercent.CaO).Sum() / Inputs.Count; } }
-        public double AverageMgO { get { return Inputs.Select(x => x.oxidPercent.MgO).Sum() / Inputs.Count; } }
-        public double AverageFeO { get { return Inputs.Select(x => x.oxidPercent.FeO).Sum() / Inputs.Count; } }
+        public double AverageSiO2 { get { return Inputs.Select(x => x.SiO2).Sum() / Inputs.Count; } }
+        public double AverageAl2O3 { get { return Inputs.Select(x => x.Al2O3).Sum() / Inputs.Count; } }
+        public double AverageCaO { get { return Inputs.Select(x => x.CaO).Sum() / Inputs.Count; } }
+        public double AverageMgO { get { return Inputs.Select(x => x.MgO).Sum() / Inputs.Count; } }
+        public double AverageFeO { get { return Inputs.Select(x => x.FeO).Sum() / Inputs.Count; } }
 
         //----------------------------------------
 
@@ -101,7 +101,7 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         {
             double _A = 1f / (1f - 3.76f * (input.O2_Percentage - 0.5f * input.CO_Percentage) / input.N2_Percentage);
             double _V_Alpha = L0 * _A + DeltaV;
-            double _V_Waste = input.materials.Cocks * ((12d / 22.4d) * input.CO_Percentage + (12d / 22.4d) * input.CO2_Percentage);
+            double _V_Waste = input.Cocks * ((12d / 22.4d) * input.CO_Percentage + (12d / 22.4d) * input.CO2_Percentage);
            
             A_AV_VW gas = new A_AV_VW()
             {
@@ -115,9 +115,9 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         }
         public A_AV_VW CalcDevice(InputDataModel input)
         {
-            double _A = input.Air_Spend / (input.materials.Cocks * L0);
+            double _A = input.Air_Spend / (input.Cocks * L0);
             double _V_Alpha = L0 * _A + DeltaV;
-            double _V_Waste = input.materials.Cocks * _V_Alpha;
+            double _V_Waste = input.Cocks * _V_Alpha;
            
             A_AV_VW device = new A_AV_VW()
             {
@@ -134,18 +134,18 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         public MaterialBalance CalcMaterialBalance(InputDataModel input, ResultDataModel result)
         {
             double OutputGas = result.Gas.V_Waste * result.qSum;
-            double Dust = (input.materials.Cocks + input.materials.Gabbro + input.materials.Limestone) * 0.03d;
-            double Smelt = input.materials.MaterialSum - OutputGas - Dust;
+            double Dust = (input.Cocks + input.Gabbro + input.Limestone) * 0.03d;
+            double Smelt = input.MaterialSum - OutputGas - Dust;
 
             double WasteSum = Smelt + Dust + OutputGas;
 
             MaterialBalance mb = new MaterialBalance()
             {
-                Cocks = input.materials.Cocks / input.materials.MaterialSum * 100,
-                Gabbro = input.materials.Cocks / input.materials.MaterialSum * 100,
-                Limestone = input.materials.Cocks / input.materials.MaterialSum * 100,
-                M_Limestone = input.materials.Cocks / input.materials.MaterialSum * 100,
-                Gas = input.materials.Cocks / input.materials.MaterialSum * 100,
+                Cocks = input.Cocks / input.MaterialSum * 100,
+                Gabbro = input.Cocks / input.MaterialSum * 100,
+                Limestone = input.Cocks / input.MaterialSum * 100,
+                M_Limestone = input.Cocks / input.MaterialSum * 100,
+                Gas = input.Cocks / input.MaterialSum * 100,
 
                 ID = input.ID,
 
@@ -181,8 +181,8 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         //ТЕПЛОВОЙ БАЛАНС
         public TeploBalance CalcTeploBalance(InputDataModel input, ResultDataModel result)
         {
-            var Gas = 33500d * input.materials.Gas / 3600d;
-            var Cocks = input.materials.Cocks * Cocks_Combustion_Temperature / 3600d;
+            var Gas = 33500d * input.Gas / 3600d;
+            var Cocks = input.Cocks * Cocks_Combustion_Temperature / 3600d;
             var Air = input.Air_Spend * (0.00000009d * input.Air_Temperature * input.Air_Temperature + 0.00004d * input.Air_Temperature + 1.296d)* input.Air_Temperature / 3600d;
            
             var SumPlus = Gas + Cocks + Air;
@@ -201,7 +201,7 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
                 (0.00000003d * input.Smoke_Temperature * input.Smoke_Temperature + 0.0002d * input.Smoke_Temperature + 1.301d) + input.N2_Percentage *
                 (0.0000007d * input.Smoke_Temperature * input.Smoke_Temperature + 0.00001d * input.Smoke_Temperature + 1.2981d) / 100d) / 3600d;
 
-            var Dust = input.materials.Limestone * input.Smoke_Temperature *
+            var Dust = input.Limestone * input.Smoke_Temperature *
                (0.4915d * (0.00007d * input.Smoke_Temperature + 1.1296d) +
                 0.1323d * (0.0002d * input.Smoke_Temperature + 1.0934d) +
                 0.2243d * (0.00009d * input.Smoke_Temperature + 0.8804d) +

@@ -10,9 +10,25 @@ namespace ImpactCalculateWebApplication.Models
     {
         public int ID { get; set; }
 
-        public Materials materials { get; set; }
+        // Расход материалов кг/ч
+        public double Gabbro { get; set; }
+        public double Limestone { get; set; }
+        public double M_Limestone { get; set; }
+        public double Cocks { get; set; }
+        public double Gas { get; set; }
+        //100%
+        public double MaterialSum { get { return Gabbro + Limestone + M_Limestone + Cocks + Gas; } }
+        //----------------------------------------------
 
-        public OxidPercent oxidPercent { get; set; }
+
+        //Содержание оксидов в %
+        public double SiO2 { get; set; }
+        public double Al2O3 { get; set; }
+        public double CaO { get; set; }
+        public double MgO { get; set; }
+        public double FeO { get; set; }
+        //---------------------------------------------
+
 
         public double Air_Spend { get; set; }
         public double Air_Pressure { get; set; }
@@ -42,47 +58,8 @@ namespace ImpactCalculateWebApplication.Models
             };
         }
 
-
-
     }
 
 
-    //Содержание оксидов в %
-    public class OxidPercent
-    {
-        public int ID { get; set; }
-
-        public double SiO2 { get; set; }
-        public double Al2O3 { get; set; }
-        public double CaO { get; set; }
-        public double MgO { get; set; }
-        public double FeO { get; set; }
-    }
-
-
-    // Расход материалов кг/ч
-    public class Materials
-    {
-        public int ID { get; set; }
-
-        public double Gabbro { get; set; }
-        public double Limestone { get; set; }
-        public double M_Limestone { get; set; }
-        public double Cocks { get; set; }
-        public double Gas { get; set; }
-
-        //100%
-        public double MaterialSum { get { return Gabbro + Limestone + M_Limestone + Cocks + Gas; } }
-
-        public Materials() { }
-        public Materials(double Gabbro, double Limestone, double M_Limestone, double Cocks, double Gas)
-        {
-            this.Gabbro = Gabbro;
-            this.Limestone = Limestone;
-            this.M_Limestone = M_Limestone;
-            this.Cocks = Cocks;
-            this.Gas = Gas;
-        }
-    }
 
 }
