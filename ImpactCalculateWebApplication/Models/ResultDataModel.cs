@@ -101,8 +101,6 @@ namespace ImpactCalculateWebApplication.Models
         public double W_g { get; set; }
         public double W_m_g { get; set; }
         //-----------------------------------
-
-
     }
 
 
