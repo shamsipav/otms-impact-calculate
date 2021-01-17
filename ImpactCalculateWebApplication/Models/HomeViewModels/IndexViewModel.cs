@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ImpactCalculateWebApplication.Models.HomeViewModels
 {
- 
+    //Леша Маладец
 
     public class IndexViewModel
     {      
