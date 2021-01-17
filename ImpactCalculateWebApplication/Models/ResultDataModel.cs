@@ -9,123 +9,99 @@ namespace ImpactCalculateWebApplication.Models
     {
         public int ID { get; set; }
 
-        public A_AV_VW Gas { get; set; } = new A_AV_VW();
-        public A_AV_VW Device { get; set; } = new A_AV_VW();
+        //Gas
+        public double Gas_A { get; set; }
+        public double Gas_V_Alpha { get; set; }
+        public double Gas_V_Waste { get; set; }
+
+        //Device
+        public double Device_A { get; set; }
+        public double Device_V_Alpha { get; set; }
+        public double Device_V_Waste { get; set; }
+
+        //--------------------------------------------
         public double Waste_Difference { get; set; }
         public double La { get; set; }
-        public MaterialBalance materialBalance { get; set; }
-        public MaterialBalanceOnTonOfSmelt materialBalanceOnTonOfSmelt { get; set; }
-        public TeploBalance teploBalance { get; set; }
-        public TeploBalanceOnTonOfSmelt teploBalanceOnTonOfSmelt { get; set; }
 
+        //Балансы:
+        #region Материальный Баланс
+        //Приход
+        public double MaterialBalance_Gabbro { get; set; }
+        public double MaterialBalance_Limestone { get; set; }
+        public double MaterialBalance_M_Limestone { get; set; }
+        public double MaterialBalance_Cocks { get; set; }
+        public double MaterialBalance_Gas { get; set; }
 
+        //Расход
+        public double MaterialBalance_Smelt { get; set; }
+        public double MaterialBalance_OutputGas { get; set; }
+        public double MaterialBalance_Dust { get; set; }
+        public double MaterialBalance_WasteSum { get; set; }
+        #endregion Материальный Баланс
+
+        #region Материальный Баланс На Тонну Расплава
+        //Приход
+        public double MaterialBalanceOnTonOfSmelt_Gabbro { get; set; }
+        public double MaterialBalanceOnTonOfSmelt_Limestone { get; set; }
+        public double MaterialBalanceOnTonOfSmelt_M_Limestone { get; set; }
+        public double MaterialBalanceOnTonOfSmelt_Cocks { get; set; }
+        public double MaterialBalanceOnTonOfSmelt_Gas { get; set; }
+
+        //Расход
+        public double MaterialBalanceOnTonOfSmelt_Smelt { get; set; }
+        public double MaterialBalanceOnTonOfSmelt_OutputGas { get; set; }
+        public double MaterialBalanceOnTonOfSmelt_Dust { get; set; }
+        public double MaterialBalanceOnTonOfSmelt_WasteSum { get; set; }
+        #endregion Материальный Баланс На Тонну Расплава
+
+        #region Тепловой Баланс
+        //Приход
+        public double TeploBalance_Air { get; set; }
+        public double TeploBalance_Cocks { get; set; }
+        public double TeploBalance_Gas { get; set; }
+        public double TeploBalance_SumPlus { get; set; }
+
+        //Расход
+        public double TeploBalance_MeltGeneration { get; set; }
+        public double TeploBalance_OutputGas { get; set; }
+        public double TeploBalance_Dust { get; set; }
+        public double TeploBalance_ChemistryUnderburning { get; set; }
+        public double TeploBalance_Endoterm_Reactions { get; set; }
+        public double TeploBalance_CoolingWater { get; set; }
+        public double TeploBalance_SumWaste { get; set; }
+        #endregion Тепловой Баланс
+
+        #region Тепловой Баланс На Тонну Расплава
+        //Приход
+        public double TeploBalanceOnTonOfSmelt_Air { get; set; }
+        public double TeploBalanceOnTonOfSmelt_Cocks { get; set; }
+        public double TeploBalanceOnTonOfSmelt_Gas { get; set; }
+        public double TeploBalanceOnTonOfSmelt_SumPlus { get; set; }
+
+        //Расход
+        public double TeploBalanceOnTonOfSmelt_MeltGeneration { get; set; }
+        public double TeploBalanceOnTonOfSmelt_OutputGas { get; set; }
+        public double TeploBalanceOnTonOfSmelt_Dust { get; set; }
+        public double TeploBalanceOnTonOfSmelt_ChemistryUnderburning { get; set; }
+        public double TeploBalanceOnTonOfSmelt_Endoterm_Reactions { get; set; }
+        public double TeploBalanceOnTonOfSmelt_CoolingWater { get; set; }
+        public double TeploBalanceOnTonOfSmelt_SumWaste { get; set; }
+        #endregion Тепловой Баланс На Тонну Расплава
+
+        //Q-шки
         public double qCO{get;set;}
         public double qCO2 { get; set; }
         public double qO2 { get; set; }
         public double qN2 { get; set; }
         public double qSum { get; set; }
+        //-----------------------------------
 
-
+        //W-шки
+        public double W_m { get; set; }
+        public double W_g { get; set; }
+        public double W_m_g { get; set; }
+        //-----------------------------------
     }
 
-    public class A_AV_VW
-    {
-        public int ID { get; set; }
-
-        public double A { get; set; }
-        public double V_Alpha { get; set; }
-        public double V_Waste { get; set; }
-
-    }
-
-    //Материальный Баланс
-    public class MaterialBalance
-    {
-        public int ID { get; set; }
-
-        //Percent of:
-
-        //Приход
-        public double Gabbro { get; set; }
-        public double Limestone { get; set; }
-        public double M_Limestone { get; set; }
-        public double Cocks { get; set; }
-        public double Gas { get; set; }
-
-        //Расход
-        public double Smelt { get; set; }
-        public double OutputGas { get; set; }
-        public double Dust { get; set; }
-        public double WasteSum { get; set; } 
-
-
-    }
-    public class MaterialBalanceOnTonOfSmelt
-    {
-        public int ID { get; set; }
-
-        //Percent of:
-
-        //Приход
-        public double Gabbro { get; set; }
-        public double Limestone { get; set; }
-        public double M_Limestone { get; set; }
-        public double Cocks { get; set; }
-        public double Gas { get; set; }
-
-        //Расход
-        public double Smelt { get; set; }
-        public double OutputGas { get; set; }
-        public double Dust { get; set; }
-        public double WasteSum { get; set; }
-
-    }
-
-    //Тепловой Баланс
-    public class TeploBalance
-    {
-        public int ID { get; set; }
-
-        //Percent of:
-
-        //Приход
-        public double Air { get; set; }
-        public double Cocks { get; set; }
-        public double Gas { get; set; }
-        public double SumPlus { get; set; }
-
-        //Расход
-        public double MeltGeneration { get; set; }
-        public double OutputGas { get; set; }
-        public double Dust { get; set; }
-        public double ChemistryUnderburning { get; set; }
-        public double Endoterm_Reactions { get; set; }
-        public double CoolingWater { get; set; }
-        public double SumWaste { get; set; }
-
-    }
-
-
-    public class TeploBalanceOnTonOfSmelt
-    {
-        public int ID { get; set; }
-
-        //Percent of:
-
-        //Приход
-        public double Air { get; set; }
-        public double Cocks { get; set; }
-        public double Gas { get; set; }
-
-        //Расход
-        public double SmeltGeneration { get; set; }
-        public double OutputGas { get; set; }
-        public double Dust { get; set; }
-        public double ChemistryUnderburning { get; set; }
-        public double Endoterm_Reactions { get; set; }
-        public double CoolingWater { get; set; }
-        public double WasteSum { get; set; }
-
-    }
 
 }

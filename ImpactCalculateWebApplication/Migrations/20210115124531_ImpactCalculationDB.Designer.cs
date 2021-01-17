@@ -2,14 +2,16 @@
 using ImpactCalculateWebApplication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ImpactCalculateWebApplication.Migrations
 {
     [DbContext(typeof(ImpactCalculationDBContext))]
-    partial class ImpactCalculationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210115124531_ImpactCalculationDB")]
+    partial class ImpactCalculationDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
