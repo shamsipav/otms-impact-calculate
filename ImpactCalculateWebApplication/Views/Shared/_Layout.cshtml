@@ -5,51 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ImpactCalculateWebApplication</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    @*<link rel="stylesheet" href="~/lib/bootstrap-table/dist/bootstrap-table.min.css" />*@
-
-    @*<link rel="stylesheet" src="~/lib/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css">*@
-
     <link rel="stylesheet" href="~/css/site.css" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-    @*<script src="~/lib/bootstrap-table/dist/bootstrap-table.min.js"></script>
-    <script src="~/lib/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js"></script>*@
+    <link rel="stylesheet" src="~/lib/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css">
+    <script src="~/lib/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
-    @*<header>
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark fixed-top bg-dark border-bottom box-shadow mb-3">
-                    <div class="container">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ImpactCalculateWebApplication</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                            <ul class="navbar-nav flex-grow-1">
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-        </header>*@
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 text-left" asp-area="" asp-controller="Home" asp-action="Index">ImpactCalculate</a>
-    </nav>
-    <div class="container-fluid">
-        <div class="row">
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                @RenderBody()
-            </main>
-        </div>
-    </div>
 
-    @*<footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2020 - ImpactCalculateWebApplication - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>*@
+     <main role="main">
+         @RenderBody()
+     </main>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

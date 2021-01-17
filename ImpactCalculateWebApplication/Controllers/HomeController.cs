@@ -30,13 +30,13 @@ namespace ImpactCalculateWebApplication.Controllers
         [HttpPost]
         public IActionResult Index(List<InputDataModel> input)
         {
-            db.Inputs.RemoveRange(db.Inputs);
+            //db.Inputs.RemoveRange(db.Inputs);
 
-            db.Inputs.AddRange(input);           
+            //db.Inputs.AddRange(input);           
 
-            db.SaveChanges();
+            //db.SaveChanges();
 
-            IndexViewModel.LastID = input[input.Count - 1].ID;
+            //IndexViewModel.LastID = input[input.Count - 1].ID;
 
             IndexViewModel viewModel = new IndexViewModel(input);
 
@@ -47,12 +47,22 @@ namespace ImpactCalculateWebApplication.Controllers
 
         public IActionResult Index()
         {
-            var Inputs = db.Inputs.ToList();
+            // 15.01.2020
+            List<InputDataModel> inputs = new List<InputDataModel>()
+            {
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData()
+            };
 
-            if(Inputs.Count!=0)
-            IndexViewModel.LastID = Inputs[Inputs.Count-1].ID;
+            //var Inputs = db.Inputs.ToList();
 
-            return View(Inputs);
+            //if(Inputs.Count!=0)
+            //IndexViewModel.LastID = Inputs[Inputs.Count-1].ID;
+
+            //return View(Inputs);
+
+            return View(inputs);
         }
 
         //------------------------------------------------------//
