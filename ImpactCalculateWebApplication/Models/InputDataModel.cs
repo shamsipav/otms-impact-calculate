@@ -36,7 +36,6 @@ namespace ImpactCalculateWebApplication.Models
         public double AverageWaterSteamTemperature { get; set; }
         //---------------------------------------------
 
-
         public double Air_Spend { get; set; }
         public double Air_Pressure { get; set; }
         public double Air_Temperature { get; set; }

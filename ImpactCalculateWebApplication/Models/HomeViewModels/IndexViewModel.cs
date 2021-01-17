@@ -12,6 +12,7 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         public Cocks selectedCocks = CocksModel.Kemerovo_3_4;
 
         public const double qAir = 1.293d;
+
         public double L1 { get; set; }
         public double L2 { get; set; }
         public double S1 { get; set; }
