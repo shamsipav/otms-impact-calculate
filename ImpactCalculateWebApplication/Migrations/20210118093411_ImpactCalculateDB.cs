@@ -2,7 +2,7 @@
 
 namespace ImpactCalculateWebApplication.Migrations
 {
-    public partial class ImpactCalculationDB : Migration
+    public partial class ImpactCalculateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -60,6 +60,7 @@ namespace ImpactCalculateWebApplication.Migrations
                     MaterialBalance_M_Limestone = table.Column<double>(type: "REAL", nullable: false),
                     MaterialBalance_Cocks = table.Column<double>(type: "REAL", nullable: false),
                     MaterialBalance_Gas = table.Column<double>(type: "REAL", nullable: false),
+                    MaterialBalance_SumPlus = table.Column<double>(type: "REAL", nullable: false),
                     MaterialBalance_Smelt = table.Column<double>(type: "REAL", nullable: false),
                     MaterialBalance_OutputGas = table.Column<double>(type: "REAL", nullable: false),
                     MaterialBalance_Dust = table.Column<double>(type: "REAL", nullable: false),
@@ -69,6 +70,7 @@ namespace ImpactCalculateWebApplication.Migrations
                     MaterialBalanceOnTonOfSmelt_M_Limestone = table.Column<double>(type: "REAL", nullable: false),
                     MaterialBalanceOnTonOfSmelt_Cocks = table.Column<double>(type: "REAL", nullable: false),
                     MaterialBalanceOnTonOfSmelt_Gas = table.Column<double>(type: "REAL", nullable: false),
+                    MaterialBalanceOnTonOfSmelt_SumPlus = table.Column<double>(type: "REAL", nullable: false),
                     MaterialBalanceOnTonOfSmelt_Smelt = table.Column<double>(type: "REAL", nullable: false),
                     MaterialBalanceOnTonOfSmelt_OutputGas = table.Column<double>(type: "REAL", nullable: false),
                     MaterialBalanceOnTonOfSmelt_Dust = table.Column<double>(type: "REAL", nullable: false),

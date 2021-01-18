@@ -146,6 +146,9 @@ namespace ImpactCalculateWebApplication.Migrations
                     b.Property<double>("MaterialBalanceOnTonOfSmelt_Smelt")
                         .HasColumnType("REAL");
 
+                    b.Property<double>("MaterialBalanceOnTonOfSmelt_SumPlus")
+                        .HasColumnType("REAL");
+
                     b.Property<double>("MaterialBalanceOnTonOfSmelt_WasteSum")
                         .HasColumnType("REAL");
 
@@ -171,6 +174,9 @@ namespace ImpactCalculateWebApplication.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<double>("MaterialBalance_Smelt")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("MaterialBalance_SumPlus")
                         .HasColumnType("REAL");
 
                     b.Property<double>("MaterialBalance_WasteSum")

@@ -161,6 +161,7 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
             result.MaterialBalanceOnTonOfSmelt_Limestone = result.MaterialBalance_Limestone * 1000 / result.MaterialBalance_Smelt;
             result.MaterialBalanceOnTonOfSmelt_M_Limestone = result.MaterialBalance_M_Limestone * 1000 / result.MaterialBalance_Smelt;
             result.MaterialBalanceOnTonOfSmelt_Gas = result.MaterialBalance_Gas * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_SumPlus = result.MaterialBalance_SumPlus * 1000 / result.MaterialBalance_Smelt;
 
             result.MaterialBalanceOnTonOfSmelt_Smelt = result.MaterialBalance_Smelt * 1000 / result.MaterialBalance_Smelt;
             result.MaterialBalanceOnTonOfSmelt_OutputGas = result.MaterialBalance_OutputGas * 1000 / result.MaterialBalance_Smelt;
