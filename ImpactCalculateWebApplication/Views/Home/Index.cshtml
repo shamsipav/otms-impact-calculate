@@ -78,7 +78,7 @@
                                             <label for="L1">L1</label>
                                         </td>
                                         <td>
-                                            <input id="L1" class="form-control" name="L1" type="text" value="">
+                                            <input id="L1" class="form-control" name="L1" type="text" value="@(ViewBag.settings.L1??0)">
                                         </td>
                                     </tr>
 
@@ -87,7 +87,7 @@
                                             <label for="L2">L2</label>
                                         </td>
                                         <td>
-                                            <input id="L2" class="form-control" name="L2" type="text" value="">
+                                            <input id="L2" class="form-control" name="L2" type="text" value="@(ViewBag.settings.L2??0)">
                                         </td>
                                     </tr>
 
@@ -96,7 +96,7 @@
                                             <label for="S1">S1</label>
                                         </td>
                                         <td>
-                                            <input id="S1" class="form-control" name="S1" type="text" value="">
+                                            <input id="S1" class="form-control" name="S1" type="text" value="@(ViewBag.settings.S1??0)">
                                         </td>
                                     </tr>
 
@@ -105,7 +105,7 @@
                                             <label for="S2">S2</label>
                                         </td>
                                         <td>
-                                            <input id="S2" class="form-control" name="S2" type="text" value="">
+                                            <input id="S2" class="form-control" name="S2" type="text" value="@(ViewBag.settings.S2??0)">
                                         </td>
                                     </tr>
 
@@ -114,7 +114,7 @@
                                             <label for="Wgr">Wgr</label>
                                         </td>
                                         <td>
-                                            <input id="Wgr" class="form-control" name="Wgr" type="text" value="">
+                                            <input id="Wgr" class="form-control" name="Wgr" type="text" value="@(ViewBag.settings.Wgr??0)">
                                         </td>
                                     </tr>
                                 </table>
@@ -125,12 +125,27 @@
                                     <select name="selectedCocks" class="custom-select">
                                         <option selected>Выбор кокса</option>
 
-                                        @{  
+                                        @{
                                             System.Reflection.PropertyInfo[] cocks = typeof(CocksModel).GetProperties();
 
                                             for (int i = 0; i < cocks.Length; i++)
                                             {
-                                                <option value="@((cocks[i].Name))">@(((Cocks)cocks[i].GetValue(null)).Name)</option>
+                                                if (ViewBag.settings != null)
+                                                {
+                                                    if (cocks[i].Name == ViewBag.settings.SelectedCocks)
+                                                    {
+                                                        <option selected value="@(cocks[i].Name)">@(((Cocks)cocks[i].GetValue(null)).Name)</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@(cocks[i].Name)">@(((Cocks)cocks[i].GetValue(null)).Name)</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <option value="@(cocks[i].Name)">@(((Cocks)cocks[i].GetValue(null)).Name)</option>
+                                                }
+
                                             }
                                         }
 
