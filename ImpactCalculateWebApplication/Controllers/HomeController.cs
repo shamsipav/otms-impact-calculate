@@ -62,6 +62,18 @@ namespace ImpactCalculateWebApplication.Controllers
             {
                 InputDataModel.GetDefaultData(),
                 InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
+                InputDataModel.GetDefaultData(),
                 InputDataModel.GetDefaultData()
             };
 

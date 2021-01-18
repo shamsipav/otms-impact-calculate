@@ -6,6 +6,8 @@
 <table id="table" class="table table-bordered table-responsive">
     <thead class="sticky-header">
         <tr>
+            <th>Смены</th>
+
             @*/------------------------GAS-----------------------/*@
             <th>a<sup>газ</sup>, доли ед</th>
             <th>Va<sup>г</sup>, м<sup>3</sup>/кг</th>
@@ -88,10 +90,13 @@
 
     @{
 
-        <td rowspan="13">1</td>
-
         for (int i = 0; i < @Model.Results.Count; i++)
         {
+            if (i % 12 == 0)
+            {
+                <td rowspan="13">@(i/12+1)</td>
+            }
+
             <tr>
                 @*/----------------------------------------------GAS--------------------------------------------------/*@
                 <td>
@@ -275,8 +280,10 @@
                     <label class="form-control" name="[@i].W_m_g" type="text">@Model.Results[i].W_m_g</label>
                 </td>
                 @*/---------------------------------------------------------------------------------------------------/*@
-            
+
             </tr>
+
+
         }
     }
 
