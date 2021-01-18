@@ -49,7 +49,7 @@ namespace ImpactCalculateWebApplication.Controllers
             viewModel.Wgr = Wgr;
 
             SettingsModel settings = new SettingsModel() { L1 = L1, L2 = L2, S1 = S1, S2 = S2, Wgr = Wgr, SelectedCocks = selectedCocks };
-
+            //ДЖЕЙСОООН КТО ТАКОЙ?
 
             StreamWriter sw = new StreamWriter(@"jija.json");
             sw.Write(JsonConvert.SerializeObject(settings));
