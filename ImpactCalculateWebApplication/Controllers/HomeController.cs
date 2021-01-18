@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ImpactCalculateWebApplication.Models;
 using ImpactCalculateWebApplication.Models.HomeViewModels;
-using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace ImpactCalculateWebApplication.Controllers
 {
@@ -48,6 +48,14 @@ namespace ImpactCalculateWebApplication.Controllers
             viewModel.S2 = S2;
             viewModel.Wgr = Wgr;
 
+            SettingsModel settings = new SettingsModel() { L1 = L1, L2 = L2, S1 = S1, S2 = S2, Wgr = Wgr, SelectedCocks = selectedCocks };
+            //ДЖЕЙСОООН КТО ТАКОЙ?
+
+            StreamWriter sw = new StreamWriter(@"jija.json");
+            sw.Write(JsonConvert.SerializeObject(settings));
+            sw.Close();
+
+
             viewModel.CalculateResults();
 
             db.Inputs.AddRange(input);
@@ -62,6 +70,12 @@ namespace ImpactCalculateWebApplication.Controllers
 
         public IActionResult Index()
         {
+            StreamReader sr = new StreamReader(@"jija.json");
+            var settings = JsonConvert.DeserializeObject<SettingsModel>(sr.ReadToEnd());
+            sr.Close();
+
+            //SettingsModel settings = new SettingsModel() { L1 = 0.2627d, L2 = 0.07d, S1 = 0.4d, S2 = 0.0086d, Wgr = 12d, SelectedCocks = "Kemerovo_3_4" };
+
             // 15.01.2020
             List<InputDataModel> inputs = new List<InputDataModel>()
             {
@@ -87,8 +101,7 @@ namespace ImpactCalculateWebApplication.Controllers
             //if(Inputs.Count!=0)
             //IndexViewModel.LastID = Inputs[Inputs.Count-1].ID;
 
-            //return View(Inputs);
-
+            ViewBag.settings = settings;
             return View(inputs);
         }
 
