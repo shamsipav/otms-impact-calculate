@@ -31,6 +31,7 @@ namespace ImpactCalculateWebApplication.Models
         public double MaterialBalance_M_Limestone { get; set; }
         public double MaterialBalance_Cocks { get; set; }
         public double MaterialBalance_Gas { get; set; }
+        public double MaterialBalance_Air { get; set; }
         public double MaterialBalance_SumPlus { get; set; }
 
         //Расход
@@ -47,6 +48,7 @@ namespace ImpactCalculateWebApplication.Models
         public double MaterialBalanceOnTonOfSmelt_M_Limestone { get; set; }
         public double MaterialBalanceOnTonOfSmelt_Cocks { get; set; }
         public double MaterialBalanceOnTonOfSmelt_Gas { get; set; }
+        public double MaterialBalanceOnTonOfSmelt_Air { get; set; }
         public double MaterialBalanceOnTonOfSmelt_SumPlus { get; set; }
 
         //Расход

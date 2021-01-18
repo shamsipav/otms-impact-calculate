@@ -28,6 +28,7 @@
             <th>Марг.изв, кг/ч</th>
             <th>Кокс, кг/ч</th>
             <th>Природный газ, кг/ч</th>
+            <th>Воздух, кг/ч</th>
             <th>Суммарный приход, кг/ч</th>
 
             <th>Расплав, кг/ч</th>
@@ -42,6 +43,7 @@
             <th>Марг.изв, кг/т</th>
             <th>Кокс, кг/т</th>
             <th>Природный газ, кг/т</th>
+            <th>Воздух, кг/т</th>
             <th>Суммарный приход, кг/т</th>
 
             <th>Расплав, кг/т</th>
@@ -146,6 +148,9 @@
         <label class="form-control" name="[@i].MaterialBalance_Gas" type="text">@Model.Results[i].MaterialBalance_Gas</label>
     </td>
     <td>
+        <label class="form-control" name="[@i].MaterialBalance_Air" type="text">@Model.Results[i].MaterialBalance_Air</label>
+    </td>
+    <td>
         <label class="form-control" name="[@i].MaterialBalance_SumPlus" type="text">@Model.Results[i].MaterialBalance_SumPlus</label>
     </td>
     @* ////// *@
@@ -176,6 +181,9 @@
     </td>
     <td>
         <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Gas" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Gas</label>
+    </td>
+    <td>
+        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Air" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Air</label>
     </td>
     <td>
         <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_SumPlus" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_SumPlus</label>

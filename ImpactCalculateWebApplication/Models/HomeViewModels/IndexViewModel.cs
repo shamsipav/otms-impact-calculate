@@ -135,19 +135,19 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         //МАТЕРИАЛЬНЫЙ БАЛАНС
         public void CalcMaterialBalance(InputDataModel input, ResultDataModel result)
         {
-            double SumPlus = input.MaterialSum - input.Gas + input.Gas * qAir;
-            result.MaterialBalance_SumPlus = SumPlus;
-
-            double OutputGas = result.Gas_V_Waste * result.qSum;
-            double Dust = (input.Cocks + input.Gabbro + input.Limestone) * 0.03d;
-            double Smelt = result.MaterialBalance_SumPlus - OutputGas - Dust;
-            double WasteSum = Smelt + Dust + OutputGas;
+            result.MaterialBalance_Air = input.Air_Spend * qAir;
+            result.MaterialBalance_SumPlus = input.MaterialSum + result.MaterialBalance_Air;
 
             result.MaterialBalance_Cocks = 100 * input.Cocks / result.MaterialBalance_SumPlus;
             result.MaterialBalance_Gabbro = 100 * input.Gabbro / result.MaterialBalance_SumPlus;
             result.MaterialBalance_Limestone = 100 * input.Limestone / result.MaterialBalance_SumPlus;
             result.MaterialBalance_M_Limestone = 100 * input.M_Limestone / result.MaterialBalance_SumPlus;
             result.MaterialBalance_Gas = 100 * input.Gas / result.MaterialBalance_SumPlus;
+
+            double OutputGas = result.Gas_V_Waste * result.qSum;
+            double Dust = (input.Cocks + input.Gabbro + input.Limestone) * 0.03d;
+            double Smelt = result.MaterialBalance_SumPlus - OutputGas - Dust;
+            double WasteSum = Smelt + Dust + OutputGas;
 
             result.MaterialBalance_Smelt = Smelt;
             result.MaterialBalance_OutputGas = OutputGas;
@@ -161,6 +161,7 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
             result.MaterialBalanceOnTonOfSmelt_Limestone = result.MaterialBalance_Limestone * 1000 / result.MaterialBalance_Smelt;
             result.MaterialBalanceOnTonOfSmelt_M_Limestone = result.MaterialBalance_M_Limestone * 1000 / result.MaterialBalance_Smelt;
             result.MaterialBalanceOnTonOfSmelt_Gas = result.MaterialBalance_Gas * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_Air = result.MaterialBalance_Air * 1000 / result.MaterialBalance_Smelt;
             result.MaterialBalanceOnTonOfSmelt_SumPlus = result.MaterialBalance_SumPlus * 1000 / result.MaterialBalance_Smelt;
 
             result.MaterialBalanceOnTonOfSmelt_Smelt = result.MaterialBalance_Smelt * 1000 / result.MaterialBalance_Smelt;

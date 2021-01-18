@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ImpactCalculateWebApplication.Migrations
 {
     [DbContext(typeof(ImpactCalculationDBContext))]
-    [Migration("20210118093411_ImpactCalculateDB")]
+    [Migration("20210118095226_ImpactCalculateDB")]
     partial class ImpactCalculateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,6 +124,9 @@ namespace ImpactCalculateWebApplication.Migrations
                     b.Property<double>("La")
                         .HasColumnType("REAL");
 
+                    b.Property<double>("MaterialBalanceOnTonOfSmelt_Air")
+                        .HasColumnType("REAL");
+
                     b.Property<double>("MaterialBalanceOnTonOfSmelt_Cocks")
                         .HasColumnType("REAL");
 
@@ -152,6 +155,9 @@ namespace ImpactCalculateWebApplication.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<double>("MaterialBalanceOnTonOfSmelt_WasteSum")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("MaterialBalance_Air")
                         .HasColumnType("REAL");
 
                     b.Property<double>("MaterialBalance_Cocks")
