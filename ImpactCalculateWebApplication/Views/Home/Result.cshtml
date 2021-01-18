@@ -34,7 +34,6 @@
             <th>Расплав, кг/ч</th>
             <th>Отходящие газы, кг/ч</th>
             <th>Пыль, кг/ч</th>
-            <th>Сумма, кг/ч</th>
             <th>Суммарный расход, кг/ч</th>
 
             @*/----------MATERIAL_BALANCE_ON_TON_OF_SMELT--------/*@
@@ -103,203 +102,203 @@
                 <td rowspan="13">@(i/12+1)</td>
             }
 
-<tr>
-    @*/----------------------------------------------GAS--------------------------------------------------/*@
-    <td>
-        <label class="form-control" name="[@i].Gas_A" type="text">@Model.Results[i].Gas_A</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].Gas_V_Alpha" type="text">@Model.Results[i].Gas_V_Alpha</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].Gas_V_Waste" type="text">@Model.Results[i].Gas_V_Waste</label>
-    </td>
-    @*/----------------------------------------------DEVICE-----------------------------------------------/*@
-    <td>
-        <label class="form-control" name="[@i].Device_A" type="text">@Model.Results[i].Device_A</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].Device_V_Alpha" type="text">@Model.Results[i].Device_V_Alpha</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].Device_V_Waste" type="text">@Model.Results[i].Device_V_Waste</label>
-    </td>
-    @*/----------------------------------------------GAS_DEVICE-------------------------------------------/*@
-    <td>
-        <label class="form-control" name="[@i].Waste_Difference" type="text">@Model.Results[i].Waste_Difference</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].La" type="text">@Model.Results[i].La</label>
-    </td>
-    @*/----------------------------------------------MATERIAL_BALANCE-------------------------------------/*@
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_Gabbro" type="text">@Model.Results[i].MaterialBalance_Gabbro</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_Limestone" type="text">@Model.Results[i].MaterialBalance_Limestone</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_M_Limestone" type="text">@Model.Results[i].MaterialBalance_M_Limestone</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_Cocks" type="text">@Model.Results[i].MaterialBalance_Cocks</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_Gas" type="text">@Model.Results[i].MaterialBalance_Gas</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_Air" type="text">@Model.Results[i].MaterialBalance_Air</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_SumPlus" type="text">@Model.Results[i].MaterialBalance_SumPlus</label>
-    </td>
-    @* ////// *@
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_Smelt" type="text">@Model.Results[i].MaterialBalance_Smelt</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_OutputGas" type="text">@Model.Results[i].MaterialBalance_OutputGas</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_Dust" type="text">@Model.Results[i].MaterialBalance_Dust</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalance_WasteSum" type="text">@Model.Results[i].MaterialBalance_WasteSum</label>
-    </td>
-    @*/----------------------------------------------MATERIAL_BALANCE_ON_TON_OF_SMELT---------------------/*@
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Gabbro" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Gabbro</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Limestone" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Limestone</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_M_Limestone" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_M_Limestone</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Cocks" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Cocks</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Gas" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Gas</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Air" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Air</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_SumPlus" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_SumPlus</label>
-    </td>
-    @* ////// *@
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Smelt" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Smelt</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_OutputGas" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_OutputGas</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Dust" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Dust</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_WasteSum" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_WasteSum</label>
-    </td>
-    @*/----------------------------------------------TEPLOVOY_BALANCE-------------------------------------/*@
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_Air" type="text">@Model.Results[i].TeploBalance_Air</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_Cocks" type="text">@Model.Results[i].TeploBalance_Cocks</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_Gas" type="text">@Model.Results[i].TeploBalance_Gas</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_SumPlus" type="text">@Model.Results[i].TeploBalance_SumPlus</label>
-    </td>
-    @* ////// *@
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_MeltGeneration" type="text">@Model.Results[i].TeploBalance_MeltGeneration</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_OutputGas" type="text">@Model.Results[i].TeploBalance_OutputGas</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_Dust" type="text">@Model.Results[i].TeploBalance_Dust</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_ChemistryUnderburning" type="text">@Model.Results[i].TeploBalance_ChemistryUnderburning</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_Endoterm_Reactions" type="text">@Model.Results[i].TeploBalance_Endoterm_Reactions</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_CoolingWater" type="text">@Model.Results[i].TeploBalance_CoolingWater</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalance_SumWaste" type="text">@Model.Results[i].TeploBalance_SumWaste</label>
-    </td>
-    @*/----------------------------------------------TEPLOVOY_BALANCE_ON_TON_OF_SMELT---------------------/*@
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_Air" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_Air</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_Cocks" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_Cocks</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_Gas" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_Gas</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_SumPlus" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_SumPlus</label>
-    </td>
-    @* ////// *@
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_MeltGeneration" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_MeltGeneration</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_OutputGas" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_OutputGas</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_Dust" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_Dust</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_ChemistryUnderburning" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_ChemistryUnderburning</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_Endoterm_Reactions" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_Endoterm_Reactions</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_CoolingWater" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_CoolingWater</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_SumWaste" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_SumWaste</label>
-    </td>
-    @*/------------------------------------------------Q-шки----------------------------------------------/*@
-    <td>
-        <label class="form-control" name="[@i].qCO" type="text">@Model.Results[i].qCO</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].qCO2" type="text">@Model.Results[i].qCO2</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].qO2" type="text">@Model.Results[i].qO2</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].qN2" type="text">@Model.Results[i].qN2</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].qSum" type="text">@Model.Results[i].qSum</label>
-    </td>
-    @*/------------------------------------------------W-шки----------------------------------------------/*@
-    <td>
-        <label class="form-control" name="[@i].W_m" type="text">@Model.Results[i].W_m</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].W_g" type="text">@Model.Results[i].W_g</label>
-    </td>
-    <td>
-        <label class="form-control" name="[@i].W_m_g" type="text">@Model.Results[i].W_m_g</label>
-    </td>
-    @*/---------------------------------------------------------------------------------------------------/*@
+            <tr>
+                @*/----------------------------------------------GAS--------------------------------------------------/*@
+                <td>
+                    <label class="form-control" name="[@i].Gas_A" type="text">@Model.Results[i].Gas_A</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].Gas_V_Alpha" type="text">@Model.Results[i].Gas_V_Alpha</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].Gas_V_Waste" type="text">@Model.Results[i].Gas_V_Waste</label>
+                </td>
+                @*/----------------------------------------------DEVICE-----------------------------------------------/*@
+                <td>
+                    <label class="form-control" name="[@i].Device_A" type="text">@Model.Results[i].Device_A</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].Device_V_Alpha" type="text">@Model.Results[i].Device_V_Alpha</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].Device_V_Waste" type="text">@Model.Results[i].Device_V_Waste</label>
+                </td>
+                @*/----------------------------------------------GAS_DEVICE-------------------------------------------/*@
+                <td>
+                    <label class="form-control" name="[@i].Waste_Difference" type="text">@Model.Results[i].Waste_Difference</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].La" type="text">@Model.Results[i].La</label>
+                </td>
+                @*/----------------------------------------------MATERIAL_BALANCE-------------------------------------/*@
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_Gabbro" type="text">@(Model.Results[i].MaterialBalance_Gabbro*Model.Results[i].MaterialBalance_SumPlus / 100)</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_Limestone" type="text">@(Model.Results[i].MaterialBalance_Limestone*Model.Results[i].MaterialBalance_SumPlus / 100)</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_M_Limestone" type="text">@(Model.Results[i].MaterialBalance_M_Limestone*Model.Results[i].MaterialBalance_SumPlus / 100)</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_Cocks" type="text">@(Model.Results[i].MaterialBalance_Cocks*Model.Results[i].MaterialBalance_SumPlus / 100)</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_Gas" type="text">@(Model.Results[i].MaterialBalance_Gas*Model.Results[i].MaterialBalance_SumPlus / 100)</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_Air" type="text">@Model.Results[i].MaterialBalance_Air</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_SumPlus" type="text">@Model.Results[i].MaterialBalance_SumPlus</label>
+                </td>
+                @* ////// *@
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_Smelt" type="text">@Model.Results[i].MaterialBalance_Smelt</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_OutputGas" type="text">@Model.Results[i].MaterialBalance_OutputGas</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_Dust" type="text">@Model.Results[i].MaterialBalance_Dust</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalance_WasteSum" type="text">@Model.Results[i].MaterialBalance_WasteSum</label>
+                </td>
+                @*/----------------------------------------------MATERIAL_BALANCE_ON_TON_OF_SMELT---------------------/*@
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Gabbro" type="text">@(Model.Results[i].MaterialBalanceOnTonOfSmelt_Gabbro)</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Limestone" type="text">@(Model.Results[i].MaterialBalanceOnTonOfSmelt_Limestone)</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_M_Limestone" type="text">@(Model.Results[i].MaterialBalanceOnTonOfSmelt_M_Limestone)</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Cocks" type="text">@(Model.Results[i].MaterialBalanceOnTonOfSmelt_Cocks)</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Gas" type="text">@(Model.Results[i].MaterialBalanceOnTonOfSmelt_Gas)</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Air" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Air</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_SumPlus" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_SumPlus</label>
+                </td>
+                @* ////// *@
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Smelt" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Smelt</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_OutputGas" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_OutputGas</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_Dust" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_Dust</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].MaterialBalanceOnTonOfSmelt_WasteSum" type="text">@Model.Results[i].MaterialBalanceOnTonOfSmelt_WasteSum</label>
+                </td>
+                @*/----------------------------------------------TEPLOVOY_BALANCE-------------------------------------/*@
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_Air" type="text">@Model.Results[i].TeploBalance_Air</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_Cocks" type="text">@Model.Results[i].TeploBalance_Cocks</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_Gas" type="text">@Model.Results[i].TeploBalance_Gas</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_SumPlus" type="text">@Model.Results[i].TeploBalance_SumPlus</label>
+                </td>
+                @* ////// *@
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_MeltGeneration" type="text">@Model.Results[i].TeploBalance_MeltGeneration</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_OutputGas" type="text">@Model.Results[i].TeploBalance_OutputGas</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_Dust" type="text">@Model.Results[i].TeploBalance_Dust</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_ChemistryUnderburning" type="text">@Model.Results[i].TeploBalance_ChemistryUnderburning</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_Endoterm_Reactions" type="text">@Model.Results[i].TeploBalance_Endoterm_Reactions</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_CoolingWater" type="text">@Model.Results[i].TeploBalance_CoolingWater</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalance_SumWaste" type="text">@Model.Results[i].TeploBalance_SumWaste</label>
+                </td>
+                @*/----------------------------------------------TEPLOVOY_BALANCE_ON_TON_OF_SMELT---------------------/*@
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_Air" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_Air</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_Cocks" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_Cocks</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_Gas" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_Gas</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_SumPlus" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_SumPlus</label>
+                </td>
+                @* ////// *@
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_MeltGeneration" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_MeltGeneration</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_OutputGas" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_OutputGas</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_Dust" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_Dust</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_ChemistryUnderburning" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_ChemistryUnderburning</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_Endoterm_Reactions" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_Endoterm_Reactions</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_CoolingWater" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_CoolingWater</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].TeploBalanceOnTonOfSmelt_SumWaste" type="text">@Model.Results[i].TeploBalanceOnTonOfSmelt_SumWaste</label>
+                </td>
+                @*/------------------------------------------------Q-шки----------------------------------------------/*@
+                <td>
+                    <label class="form-control" name="[@i].qCO" type="text">@Model.Results[i].qCO</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].qCO2" type="text">@Model.Results[i].qCO2</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].qO2" type="text">@Model.Results[i].qO2</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].qN2" type="text">@Model.Results[i].qN2</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].qSum" type="text">@Model.Results[i].qSum</label>
+                </td>
+                @*/------------------------------------------------W-шки----------------------------------------------/*@
+                <td>
+                    <label class="form-control" name="[@i].W_m" type="text">@Model.Results[i].W_m</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].W_g" type="text">@Model.Results[i].W_g</label>
+                </td>
+                <td>
+                    <label class="form-control" name="[@i].W_m_g" type="text">@Model.Results[i].W_m_g</label>
+                </td>
+                @*/---------------------------------------------------------------------------------------------------/*@
 
-</tr>
+            </tr>
 
 
         }

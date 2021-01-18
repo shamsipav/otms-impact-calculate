@@ -19,13 +19,23 @@ $(document).ready(function () {
     //})
 
     GetSizeOfTable();
+    ScrollTopOnAddRow();
 
     function GetSizeOfTable() {
         var rowCount = $('#table tr').length;
 
+        console.log(rowCount);
+
         if (rowCount > 6) {
             $(".table").addClass("overflow-y");
         }
+    }
+
+    function ScrollTopOnAddRow() {
+
+        $("#AddRow").click(function () {
+            $("#table").scrollTop($("#table")[0].scrollHeight);
+        })
     }
 
     //$("#AddRow").click(function () {

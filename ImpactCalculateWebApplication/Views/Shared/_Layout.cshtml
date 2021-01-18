@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="~/css/site.css" />
 
     <link rel="stylesheet" src="~/lib/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.css">
-    <script src="~/lib/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js"></script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
 
-     <main role="main">
-         @RenderBody()
-     </main>
+    <main role="main">
+        @RenderBody()
+    </main>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
