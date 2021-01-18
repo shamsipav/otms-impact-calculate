@@ -35,11 +35,7 @@ namespace ImpactCalculateWebApplication.Controllers
 
             IndexViewModel viewModel = new IndexViewModel(input);
 
-            // Установить выбранный на форме кокс*
-            viewModel.selectedCocks = CocksModel.Kemerovo_3_4;
-
             System.Reflection.PropertyInfo[] cockses = typeof(CocksModel).GetProperties();
-
             viewModel.selectedCocks = (Cocks)cockses.First(x => x.Name == selectedCocks).GetValue(null);
 
             viewModel.L1 = L1;
@@ -49,7 +45,6 @@ namespace ImpactCalculateWebApplication.Controllers
             viewModel.Wgr = Wgr;
 
             SettingsModel settings = new SettingsModel() { L1 = L1, L2 = L2, S1 = S1, S2 = S2, Wgr = Wgr, SelectedCocks = selectedCocks };
-            //ДЖЕЙСОООН КТО ТАКОЙ?
 
             StreamWriter sw = new StreamWriter(@"jija.json");
             sw.Write(JsonConvert.SerializeObject(settings));
@@ -61,9 +56,7 @@ namespace ImpactCalculateWebApplication.Controllers
             db.Inputs.AddRange(input);
             db.Results.AddRange(viewModel.Results);
 
-            //db.SaveChanges();
-
-            //IndexViewModel.LastID = input[input.Count - 1].ID;
+            db.SaveChanges();
 
             return View("Result", viewModel);
         }
@@ -76,33 +69,16 @@ namespace ImpactCalculateWebApplication.Controllers
 
             //SettingsModel settings = new SettingsModel() { L1 = 0.2627d, L2 = 0.07d, S1 = 0.4d, S2 = 0.0086d, Wgr = 12d, SelectedCocks = "Kemerovo_3_4" };
 
-            // 15.01.2020
-            List<InputDataModel> inputs = new List<InputDataModel>()
-            {
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData(),
-                InputDataModel.GetDefaultData()
-            };
+            //List<InputDataModel> Inputs = new List<InputDataModel>()
+            //{
+            //    InputDataModel.GetDefaultData()
+            //};
 
-            //var Inputs = db.Inputs.ToList();
+            var Inputs = db.Inputs.ToList();
 
-            //if(Inputs.Count!=0)
-            //IndexViewModel.LastID = Inputs[Inputs.Count-1].ID;
-
+    
             ViewBag.settings = settings;
-            return View(inputs);
+            return View(Inputs);
         }
 
         //------------------------------------------------------//

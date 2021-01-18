@@ -5,306 +5,308 @@
 
 
 @*<div class="col-md-2 d-none d-md-block bg-light sidebar">
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-        <span>Постоянные величины</span>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Постоянные величины</span>
 
-    </h6>
-    <div class="dropdown d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
-        <button class="btn btn-light btn-sm dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Выбор кокса
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-         
-            @{ System.Reflection.PropertyInfo[] cocks = cocksModel.GetType().GetProperties();
+        </h6>
+        <div class="dropdown d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
+            <button class="btn btn-light btn-sm dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Выбор кокса
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                for (int i = 0; i < cocks.Length; i++)
-                {
-                    <a class="dropdown-item" href="#@(((Cocks)cocks[i].GetValue(cocksModel)).Q)">@(((Cocks)cocks[i].GetValue(cocksModel)).Name)</a> } }
-        </div>
-    </div>
-    <div class="px-3 mt-4 mb-">
-        <button type="submit" id="AddRow" name="buttonType" class="btn btn-light btn-sm">Добавить строку</button>
-        <button type="submit" id="RemoveRow" name="buttonType" class="btn btn-light btn-sm">Удалить строку</button>
-    </div>
-</div>*@
+                @{ System.Reflection.PropertyInfo[] cocks = cocksModel.GetType().GetProperties();
 
-    <section class="head py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Album example</h1>
-                <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-                
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    Насройка параметров
-                </button>
-             
+                    for (int i = 0; i < cocks.Length; i++)
+                    {
+                        <a class="dropdown-item" href="#@(((Cocks)cocks[i].GetValue(cocksModel)).Q)">@(((Cocks)cocks[i].GetValue(cocksModel)).Name)</a> } }
             </div>
         </div>
-    </section>
+        <div class="px-3 mt-4 mb-">
+            <button type="submit" id="AddRow" name="buttonType" class="btn btn-light btn-sm">Добавить строку</button>
+            <button type="submit" id="RemoveRow" name="buttonType" class="btn btn-light btn-sm">Удалить строку</button>
+        </div>
+    </div>*@
 
-    <div class="main-content bg-light">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-                <h1 class="h2">Исходные данные</h1>
-                <div class="ml-3 mr-auto">
-                    <button type="submit" id="AddRow" name="buttonType" class="row-configure-button btn btn-light btn-sm">Добавить</button>
-                    <button type="submit" id="RemoveRow" name="buttonType" class="row-configure-button btn btn-light btn-sm">Удалить</button>
-                </div>
+<section class="head py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Album example</h1>
+            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                Насройка параметров
+            </button>
+
+        </div>
+    </div>
+</section>
+
+<div class="main-content bg-light">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+            <h1 class="h2">Исходные данные</h1>
+            <div class="ml-3 mr-auto">
+                <button type="submit" id="AddRow" name="buttonType" class="row-configure-button btn btn-light btn-sm">Добавить</button>
+                <button type="submit" id="RemoveRow" name="buttonType" class="row-configure-button btn btn-light btn-sm">Удалить</button>
             </div>
-            <form action="/Home/Index" method="post" class="input-form">
+        </div>
+        <form action="/Home/Index" method="post" class="input-form">
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Насройка параметров</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <table class="table table-responsive m-auto" style="width: fit-content;">
-                                    @*<thead>
-                                        <tr>
-                                            <th>Параметр</th>
-                                            <th>Значение</th>
-                                        </tr>
-                                    </thead>*@
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Насройка параметров</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-responsive m-auto" style="width: fit-content;">
+                                @*<thead>
+                                <tr>
+                                    <th>Параметр</th>
+                                    <th>Значение</th>
+                                </tr>
+                            </thead>*@
 
-                                    <tr>
-                                        <td>
-                                            <label for="L1">L1</label>
-                                        </td>
-                                        <td>
-                                            <input id="L1" class="form-control" name="L1" type="text" value="@(ViewBag.settings.L1??0)">
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <label for="L1">L1</label>
+                                    </td>
+                                    <td>
+                                        <input id="L1" class="form-control" name="L1" type="text" value="@(ViewBag.settings.L1??0)">
+                                    </td>
+                                </tr>
 
-                                    <tr>
-                                        <td>
-                                            <label for="L2">L2</label>
-                                        </td>
-                                        <td>
-                                            <input id="L2" class="form-control" name="L2" type="text" value="@(ViewBag.settings.L2??0)">
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <label for="L2">L2</label>
+                                    </td>
+                                    <td>
+                                        <input id="L2" class="form-control" name="L2" type="text" value="@(ViewBag.settings.L2??0)">
+                                    </td>
+                                </tr>
 
-                                    <tr>
-                                        <td>
-                                            <label for="S1">S1</label>
-                                        </td>
-                                        <td>
-                                            <input id="S1" class="form-control" name="S1" type="text" value="@(ViewBag.settings.S1??0)">
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <label for="S1">S1</label>
+                                    </td>
+                                    <td>
+                                        <input id="S1" class="form-control" name="S1" type="text" value="@(ViewBag.settings.S1??0)">
+                                    </td>
+                                </tr>
 
-                                    <tr>
-                                        <td>
-                                            <label for="S2">S2</label>
-                                        </td>
-                                        <td>
-                                            <input id="S2" class="form-control" name="S2" type="text" value="@(ViewBag.settings.S2??0)">
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <label for="S2">S2</label>
+                                    </td>
+                                    <td>
+                                        <input id="S2" class="form-control" name="S2" type="text" value="@(ViewBag.settings.S2??0)">
+                                    </td>
+                                </tr>
 
-                                    <tr>
-                                        <td>
-                                            <label for="Wgr">Wgr</label>
-                                        </td>
-                                        <td>
-                                            <input id="Wgr" class="form-control" name="Wgr" type="text" value="@(ViewBag.settings.Wgr??0)">
-                                        </td>
-                                    </tr>
-                                </table>
+                                <tr>
+                                    <td>
+                                        <label for="Wgr">Wgr</label>
+                                    </td>
+                                    <td>
+                                        <input id="Wgr" class="form-control" name="Wgr" type="text" value="@(ViewBag.settings.Wgr??0)">
+                                    </td>
+                                </tr>
+                            </table>
 
-                            </div>
-                            <div class="modal-footer">
-                                <div class="mr-auto">
-                                    <select name="selectedCocks" class="custom-select">
-                                        <option selected>Выбор кокса</option>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="mr-auto">
+                                <select name="selectedCocks" class="custom-select">
+                                    <option selected>Выбор кокса</option>
 
-                                        @{
-                                            System.Reflection.PropertyInfo[] cocks = typeof(CocksModel).GetProperties();
+                                    @{
+                                        System.Reflection.PropertyInfo[] cocks = typeof(CocksModel).GetProperties();
 
-                                            for (int i = 0; i < cocks.Length; i++)
+                                        for (int i = 0; i < cocks.Length; i++)
+                                        {
+                                            if (ViewBag.settings != null)
                                             {
-                                                if (ViewBag.settings != null)
+                                                if (cocks[i].Name == ViewBag.settings.SelectedCocks)
                                                 {
-                                                    if (cocks[i].Name == ViewBag.settings.SelectedCocks)
-                                                    {
-                                                        <option selected value="@(cocks[i].Name)">@(((Cocks)cocks[i].GetValue(null)).Name)</option>
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@(cocks[i].Name)">@(((Cocks)cocks[i].GetValue(null)).Name)</option>
-                                                    }
+                                                    <option selected value="@(cocks[i].Name)">@(((Cocks)cocks[i].GetValue(null)).Name)</option>
                                                 }
                                                 else
                                                 {
                                                     <option value="@(cocks[i].Name)">@(((Cocks)cocks[i].GetValue(null)).Name)</option>
                                                 }
-
                                             }
-                                        }
+                                            else
+                                            {
+                                                <option value="@(cocks[i].Name)">@(((Cocks)cocks[i].GetValue(null)).Name)</option>
+                                            }
 
-                                    </select>
-                                </div>
-                                <button type="button" class="btn btn-secondary btn-success" data-dismiss="modal">Сохранить</button>
+                                        }
+                                    }
+
+                                </select>
                             </div>
+                            <button type="button" class="btn btn-secondary btn-success" data-dismiss="modal">Сохранить</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <table id="table" class="table table-bordered table-responsive">
-                    <thead class="sticky-header">
+            <table id="table" class="table table-bordered table-responsive">
+                <thead class="sticky-header">
+                    <tr>
+                        <th>Смены</th>
+                        <th>Расход воздуха, м3/ч</th>
+                        <th>Давление воздуха, мбар</th>
+                        <th>Температура подогрева воздуха, *C</th>
+                        <th>Температура отходящих газов, *C</th>
+                        <th>Вязкость, усл. ед.</th>
+                        <th>Температура расплава, *C</th>
+                        <th>Содержание CO, %</th>
+                        <th>Содержание CO2, %</th>
+                        <th>Содержание N2, %</th>
+                        <th>Содержание O2, %</th>
+
+                        <th>Габро, кг/ч</th>
+                        <th>Известняк, кг/ч</th>
+                        <th>Марганцовистый известняк, кг/ч</th>
+                        <th>Кокс, кг/ч</th>
+                        <th>Природный газ, кг/ч</th>
+
+                        <th>SiO<sub>2</sub>, %</th>
+                        <th>Al<sub>2</sub>O<sub>3</sub>, %</th>
+                        <th>CaO, %</th>
+                        <th>MgO, %</th>
+                        <th>FeO, %</th>
+
+                        <th>Расход воды на входе</th>
+                        <th>Расход воды на выходе</th>
+                        <th>Ср. темп. пара-водяной смеси</th>
+                    </tr>
+                </thead>
+
+
+                @{
+
+                    for (int i = 0; i < @Model.Count; i++)
+                    {
                         <tr>
-                            <th>Смены</th>
-                            <th>Расход воздуха, м3/ч</th>
-                            <th>Давление воздуха, мбар</th>
-                            <th>Температура подогрева воздуха, *C</th>
-                            <th>Температура отходящих газов, *C</th>
-                            <th>Вязкость, усл. ед.</th>
-                            <th>Температура расплава, *C</th>
-                            <th>Содержание CO, %</th>
-                            <th>Содержание CO2, %</th>
-                            <th>Содержание N2, %</th>
-                            <th>Содержание O2, %</th>
 
-                            <th>Габро, кг/ч</th>
-                            <th>Известняк, кг/ч</th>
-                            <th>Марганцовистый известняк, кг/ч</th>
-                            <th>Кокс, кг/ч</th>
-                            <th>Природный газ, кг/ч</th>
+                            @{
+                                Model[i].ID = i;
+                                if (i % 12 == 0)
+                                {
+                                    <td rowspan="12">@(i / 12 + 1)</td>
+                                }
+                            }
 
-                            <th>SiO<sub>2</sub>, %</th>
-                            <th>Al<sub>2</sub>O<sub>3</sub>, %</th>
-                            <th>CaO, %</th>
-                            <th>MgO, %</th>
-                            <th>FeO, %</th>
+                            <td>
+                                <input class="form-control" name="[@i].Air_Spend" type="text" value=@Model[i].Air_Spend>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].Air_Pressure" type="text" value=@Model[i].Air_Pressure>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].Air_Temperature" type="text" value=@Model[i].Air_Temperature>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].Smoke_Temperature" type="text" value=@Model[i].Smoke_Temperature>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].Viscosity" type="text" value=@Model[i].Viscosity>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].Smelt_Temperature" type="text" value=@Model[i].Smelt_Temperature>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].CO_Percentage" type="text" value=@Model[i].CO_Percentage>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].CO2_Percentage" type="text" value=@Model[i].CO2_Percentage>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].N2_Percentage" type="text" value=@Model[i].N2_Percentage>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].O2_Percentage" type="text" value=@Model[i].O2_Percentage>
+                            </td>
 
-                            <th>Расход воды на входе</th>
-                            <th>Расход воды на выходе</th>
-                            <th>Ср. темп. пара-водяной смеси</th>
+                            @* РАСХОД МАТЕРИАЛОВ *@
+
+                            <td>
+                                <input class="form-control" name="[@i].Gabbro" type="text" value=@Model[i].Gabbro>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].Limestone" type="text" value=@Model[i].Limestone>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].M_Limestone" type="text" value=@Model[i].M_Limestone>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].Cocks" type="text" value=@Model[i].Cocks>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].Gas" type="text" value=@Model[i].Gas>
+                            </td>
+
+                            @* СОДЕРЖАНИЕ ОКСИДОЕ *@
+
+                            <td>
+                                <input class="form-control" name="[@i].SiO2" type="text" value=@Model[i].SiO2>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].Al2O3" type="text" value=@Model[i].Al2O3>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].CaO" type="text" value=@Model[i].CaO>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].MgO" type="text" value=@Model[i].MgO>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].FeO" type="text" value=@Model[i].FeO>
+                            </td>
+
+                            @* ПАРАМЕТРЫ ОХЛАЖДАЮЩЕЙ ВОДЫ *@
+
+                            <td>
+                                <input class="form-control" name="[@i].InputWaterWaste" type="text" value=@Model[i].InputWaterWaste>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].OutputWaterWaste" type="text" value=@Model[i].OutputWaterWaste>
+                            </td>
+                            <td>
+                                <input class="form-control" name="[@i].AverageWaterSteamTemperature" type="text" value=@Model[i].AverageWaterSteamTemperature>
+                            </td>
                         </tr>
-                    </thead>
-
-
-                    @{
-
-                        for (int i = 0; i < @Model.Count; i++)
-                        {
-                            <tr>
-
-                                @{
-                                    if (i % 12 == 0)
-                                    {
-                                        <td rowspan="12">@(i / 12 + 1)</td>
-                                    }
-                                 } 
-
-                                <td>
-                                    <input class="form-control" name="[@i].Air_Spend" type="text" value=@Model[i].Air_Spend>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].Air_Pressure" type="text" value=@Model[i].Air_Pressure>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].Air_Temperature" type="text" value=@Model[i].Air_Temperature>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].Smoke_Temperature" type="text" value=@Model[i].Smoke_Temperature>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].Viscosity" type="text" value=@Model[i].Viscosity>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].Smelt_Temperature" type="text" value=@Model[i].Smelt_Temperature>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].CO_Percentage" type="text" value=@Model[i].CO_Percentage>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].CO2_Percentage" type="text" value=@Model[i].CO2_Percentage>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].N2_Percentage" type="text" value=@Model[i].N2_Percentage>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].O2_Percentage" type="text" value=@Model[i].O2_Percentage>
-                                </td>
-
-                                @* РАСХОД МАТЕРИАЛОВ *@
-
-                                <td>
-                                    <input class="form-control" name="[@i].Gabbro" type="text" value=@Model[i].Gabbro>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].Limestone" type="text" value=@Model[i].Limestone>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].M_Limestone" type="text" value=@Model[i].M_Limestone>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].Cocks" type="text" value=@Model[i].Cocks>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].Gas" type="text" value=@Model[i].Gas>
-                                </td>
-
-                                @* СОДЕРЖАНИЕ ОКСИДОЕ *@
-
-                                <td>
-                                    <input class="form-control" name="[@i].SiO2" type="text" value=@Model[i].SiO2>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].Al2O3" type="text" value=@Model[i].Al2O3>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].CaO" type="text" value=@Model[i].CaO>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].MgO" type="text" value=@Model[i].MgO>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].FeO" type="text" value=@Model[i].FeO>
-                                </td>
-
-                                @* ПАРАМЕТРЫ ОХЛАЖДАЮЩЕЙ ВОДЫ *@
-
-                                <td>
-                                    <input class="form-control" name="[@i].InputWaterWaste" type="text" value=@Model[i].InputWaterWaste>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].OutputWaterWaste" type="text" value=@Model[i].OutputWaterWaste>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@i].AverageWaterSteamTemperature" type="text" value=@Model[i].AverageWaterSteamTemperature>
-                                </td>
-                            </tr>
-                        }
                     }
+                }
+            </table>
+            <button type="submit" id="Calculate" name="buttonType" class="btn btn-primary">Calculate</button>
 
-                <script>
-                        $(document).ready(function () {
-
-                            // Добавление
-                            $('#AddRow').on('click', function () {
+            <script>
+                $(document).ready(function () {
+                    // Добавление
+                    $('#AddRow').on('click', function () {
 
                             @{
                                 var newInput = InputDataModel.GetDefaultData();
-                                newInput.ID = ++id;
+                                newInput.ID = Model.Count + 1;
                                 Model.Add(newInput);
                             }
-                                let rowCount = $('#table tbody tr').length;
-                                //rowCount++;
-                                console.log(rowCount);
+                        let rowCount = $('#table tbody tr').length;
+                        //rowCount++;
+                        console.log(rowCount);
 
-                                if (rowCount % 12 == 0) {
-                                    GetNewRowWithRowspan((rowCount / 12) + 1);
-                                }
-
+                        if (rowCount % 12 == 0) {
+                            GetNewRowWithRowspan((rowCount / 12) + 1);
+                        }
+                        else {
                             $('#table tbody').append(`<tr>
 
                                 <td>
@@ -387,12 +389,16 @@
                                 </td>
 
                             </tr>`);
+                        }
 
-                            });
 
-                            function GetNewRowWithRowspan(rowSpanValue) {
-                                $('#table tbody').append(`<tr>
-                                    
+
+                    });
+
+
+                    function GetNewRowWithRowspan(rowSpanValue) {
+                        $('#table tbody').append(`<tr>
+
                                 <td rowspan="12">${rowSpanValue}</td>
 
                                 <td>
@@ -475,41 +481,119 @@
                                 </td>
 
                             </tr>`);
+                    }
+
+                    // Удаление
+
+                    $('#RemoveRow').on('click', function () {
+
+                        let rowCount = $('#table tbody tr').length;
+
+                        if (rowCount > 2) {
+
+                            document.getElementsByTagName("tr")[rowCount].remove();
+
+                            if (rowCount % 12 == 0) {
+
+                                $('tbody').remove(`<tr>
+
+                                <td rowspan="12">${rowSpanValue}</td>
+
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Spend" type="text" value=@Model[Model.Count - 1].Air_Spend>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Pressure" type="text" value=@Model[Model.Count - 1].Air_Pressure>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Temperature" type="text" value=@Model[Model.Count - 1].Air_Temperature>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Smoke_Temperature" type="text" value=@Model[Model.Count - 1].Smoke_Temperature>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Viscosity" type="text" value=@Model[Model.Count - 1].Viscosity>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Smelt_Temperature" type="text" value=@Model[Model.Count - 1].Smelt_Temperature>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].CO_Percentage" type="text" value=@Model[Model.Count - 1].CO_Percentage>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].CO2_Percentage" type="text" value=@Model[Model.Count - 1].CO2_Percentage>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].N2_Percentage" type="text" value=@Model[Model.Count - 1].N2_Percentage>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].O2_Percentage" type="text" value=@Model[Model.Count - 1].O2_Percentage>
+                                </td>
+
+                                @* РАСХОД МАТЕРИАЛОВ *@
+
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Gabbro" type="text" value=@Model[Model.Count - 1].Gabbro>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Limestone" type="text" value=@Model[Model.Count - 1].Limestone>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].M_Limestone" type="text" value=@Model[Model.Count - 1].M_Limestone>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Cocks" type="text" value=@Model[Model.Count - 1].Cocks>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Gas" type="text" value=@Model[Model.Count - 1].Gas>
+                                </td>
+
+                                @* СОДЕРЖАНИЕ ОКСИДОЕ *@
+
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].SiO2" type="text" value=@Model[Model.Count - 1].SiO2>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].Al2O3" type="text" value=@Model[Model.Count - 1].Al2O3>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].CaO" type="text" value=@Model[Model.Count - 1].CaO>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].MgO" type="text" value=@Model[Model.Count - 1].MgO>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].FeO" type="text" value=@Model[Model.Count - 1].FeO>
+                                </td>
+
+                                @* ПАРАМЕТРЫ ОХЛАЖДАЮЩЕЙ ВОДЫ *@
+
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].InputWaterWaste" type="text" value=@Model[Model.Count - 1].InputWaterWaste>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].OutputWaterWaste" type="text" value=@Model[Model.Count - 1].OutputWaterWaste>
+                                </td>
+                                <td>
+                                    <input class="form-control" name="[@(Model.Count - 1)].AverageWaterSteamTemperature" type="text" value=@Model[Model.Count - 1].AverageWaterSteamTemperature>
+                                </td>
+
+                            </tr>`);
+
+                                shiftCount--;
                             }
 
+                            rowCount--;
 
-            @*// Удаление
+                            $(@{Model.RemoveAt(Model.Count - 1);})
+                        }
+                    });
 
-            $('#RemoveRow').on('click', function () {
 
-                    if (rowCount > 2)
-                    {
-                        document.getElementsByTagName("tr")[rowCount].remove();
 
-                        //$('tbody').children('tr')
-                        if (rowCount % shiftTime == 1) {
-
-                    $('tbody').remove(`<tr>
-                    <td class="text-center" rowspan="${shiftTime}">${shiftCount}</td>
-                    </tr>`);
-
-                shiftCount--;
-                }
-
-                rowCount--;
-
-                $(@{Model.RemoveAt(Model.Count - 1);})
-
-                }
-
-            });*@
-
-        });
-                </script>
-
-                                            </table>
-                                            <button type="submit" id="Calculate" name="buttonType" class="btn btn-primary">Calculate</button>
-
-</form>
-        </div>        
+                });
+            </script>
+        </form>
     </div>
+</div>
+
