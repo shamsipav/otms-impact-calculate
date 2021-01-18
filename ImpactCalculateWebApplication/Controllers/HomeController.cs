@@ -35,8 +35,12 @@ namespace ImpactCalculateWebApplication.Controllers
 
             IndexViewModel viewModel = new IndexViewModel(input);
 
-            System.Reflection.PropertyInfo[] cocks = typeof(CocksModel).GetProperties();
-            viewModel.selectedCocks = (Cocks)cocks.First(x => x.Name == selectedCocks).GetValue(null);
+            // Установить выбранный на форме кокс*
+            viewModel.selectedCocks = CocksModel.Kemerovo_3_4;
+
+            System.Reflection.PropertyInfo[] cockses = typeof(CocksModel).GetProperties();
+
+            viewModel.selectedCocks = (Cocks)cockses.First(x => x.Name == selectedCocks).GetValue(null);
 
             viewModel.L1 = L1;
             viewModel.L2 = L2;
