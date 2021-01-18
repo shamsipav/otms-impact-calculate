@@ -18,17 +18,27 @@ $(document).ready(function () {
     //    }
     //})
 
-    $("#AddRow").click(function () {
+    GetSizeOfTable();
 
-        //let block = document.querySelector(".table");
+    function GetSizeOfTable() {
+        var rowCount = $('#table tr').length;
 
-
-        $(".table").scrollTop($(".table")[0].scrollHeight);
-
-        if ($(".table").height() > 400) {
+        if (rowCount > 6) {
             $(".table").addClass("overflow-y");
         }
-    })
+    }
+
+    //$("#AddRow").click(function () {
+
+    //    //let block = document.querySelector(".table");
+
+
+    //    $(".table").scrollTop($(".table")[0].scrollHeight);
+
+    //    if ($(".table").height() > 400) {
+    //        $(".table").addClass("overflow-y");
+    //    }
+    //})
 
     //$(window).scroll(function () {
     //    $(".head").css("height", 200 + "px");
