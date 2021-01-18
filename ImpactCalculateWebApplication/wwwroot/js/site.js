@@ -19,22 +19,24 @@ $(document).ready(function () {
     //})
 
     GetSizeOfTable();
-    ScrollTopOnAddRow();
+    AddNewShift();
 
     function GetSizeOfTable() {
-        var rowCount = $('#table tr').length;
+        let rowCount = $('#table tbody tr').length;
 
-        console.log(rowCount);
-
-        if (rowCount > 6) {
+        if (rowCount > 4) {
             $(".table").addClass("overflow-y");
         }
     }
 
-    function ScrollTopOnAddRow() {
-
+    function AddNewShift() {
         $("#AddRow").click(function () {
+            let rowCount = $('#table tbody tr').length;
             $("#table").scrollTop($("#table")[0].scrollHeight);
+
+            if (rowCount > 4) {
+                $(".table").addClass("overflow-y");
+            }
         })
     }
 
