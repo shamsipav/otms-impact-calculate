@@ -156,11 +156,11 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         }
         public void CalcMaterialBalanceOnTonOfSmelt(InputDataModel input, ResultDataModel result)
         {
-            result.MaterialBalanceOnTonOfSmelt_Cocks = result.MaterialBalance_Cocks * 1000 / result.MaterialBalance_Smelt;
-            result.MaterialBalanceOnTonOfSmelt_Gabbro = result.MaterialBalance_Gabbro * 1000 / result.MaterialBalance_Smelt;
-            result.MaterialBalanceOnTonOfSmelt_Limestone = result.MaterialBalance_Limestone * 1000 / result.MaterialBalance_Smelt;
-            result.MaterialBalanceOnTonOfSmelt_M_Limestone = result.MaterialBalance_M_Limestone * 1000 / result.MaterialBalance_Smelt;
-            result.MaterialBalanceOnTonOfSmelt_Gas = result.MaterialBalance_Gas * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_Cocks = input.Cocks * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_Gabbro = input.Gabbro * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_Limestone = input.Limestone * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_M_Limestone = input.M_Limestone * 1000 / result.MaterialBalance_Smelt;
+            result.MaterialBalanceOnTonOfSmelt_Gas = input.Gas * 1000 / result.MaterialBalance_Smelt;
             result.MaterialBalanceOnTonOfSmelt_Air = result.MaterialBalance_Air * 1000 / result.MaterialBalance_Smelt;
             result.MaterialBalanceOnTonOfSmelt_SumPlus = result.MaterialBalance_SumPlus * 1000 / result.MaterialBalance_Smelt;
 
