@@ -13,11 +13,11 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
 
         public const double qAir = 1.293d;
 
-        public double L1 { get; set; }
-        public double L2 { get; set; }
-        public double S1 { get; set; }
-        public double S2 { get; set; }
-        public double Wgr { get; set; }
+        public double L1 { get; set; } = 0.2627d;
+        public double L2 { get; set; } = 0.07d;
+        public double S1 { get; set; } = 0.4d;
+        public double S2 { get; set; } = 0.0086d;
+        public double Wgr { get; set; } = 12d;
 
         public double Cocks_Combustion_Temperature { get { return 4.1868 * selectedCocks.Q; } }
 
@@ -84,12 +84,16 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
                          - 0.0050555626d * input.Smoke_Temperature + 1.4267518409d;
             result.qN2 = -0.0000000164d * Math.Pow(input.Smoke_Temperature, 3) + 0.0000119935d * Math.Pow(input.Smoke_Temperature, 2) 
                          - 0.0043758306d * input.Smoke_Temperature + 1.2486235488d;
-            result.qSum = result.qCO + result.qCO2 + result.qN2 + result.qO2;
+            result.qSum = (result.qCO * input.CO_Percentage + result.qCO2 * input.CO2_Percentage + result.qN2 * input.N2_Percentage + result.qO2 * input.O2_Percentage) / 100d;
             //------------------
 
             CalcMaterialBalance(input, result);
 
             CalcMaterialBalanceOnTonOfSmelt(input, result);
+
+            CalcTeploBalance(input, result);
+
+            CalcTeploBalanceOnTonOfSmelt(input, result);
 
             //W-шки
             result.W_m = (input.Cocks * result.MaterialBalance_Cocks * 1.008d +
@@ -137,10 +141,10 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
             double WasteSum = Smelt + Dust + OutputGas;
 
             result.MaterialBalance_Cocks = input.Cocks / input.MaterialSum * 100;
-            result.MaterialBalance_Gabbro = input.Cocks / input.MaterialSum * 100;
-            result.MaterialBalance_Limestone = input.Cocks / input.MaterialSum * 100;
-            result.MaterialBalance_M_Limestone = input.Cocks / input.MaterialSum * 100;
-            result.MaterialBalance_Gas = input.Cocks / input.MaterialSum * 100;
+            result.MaterialBalance_Gabbro = input.Gabbro / input.MaterialSum * 100;
+            result.MaterialBalance_Limestone = input.Limestone / input.MaterialSum * 100;
+            result.MaterialBalance_M_Limestone = input.M_Limestone / input.MaterialSum * 100;
+            result.MaterialBalance_Gas = input.Gas / input.MaterialSum * 100;
 
             result.MaterialBalance_Smelt = Smelt;
             result.MaterialBalance_OutputGas = OutputGas;

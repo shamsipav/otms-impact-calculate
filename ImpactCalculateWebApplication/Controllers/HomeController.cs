@@ -35,13 +35,14 @@ namespace ImpactCalculateWebApplication.Controllers
 
             IndexViewModel viewModel = new IndexViewModel(input);
 
+                                      // Установить выбранный на форме кокс*
             viewModel.selectedCocks = CocksModel.Kemerovo_3_4;
 
-            viewModel.L1 = L1;
-            viewModel.L2 = L2;
-            viewModel.S1 = S1;
-            viewModel.S2 = S2;
-            viewModel.Wgr = Wgr;
+            //viewModel.L1 = L1;
+            //viewModel.L2 = L2;
+            //viewModel.S1 = S1;
+            //viewModel.S2 = S2;
+            //viewModel.Wgr = Wgr;
 
             viewModel.CalculateResults();
 

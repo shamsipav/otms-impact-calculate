@@ -54,13 +54,32 @@ namespace ImpactCalculateWebApplication.Models
                 Air_Spend = 5850,
                 Air_Pressure = 70,
                 Air_Temperature = 610.2,
+
                 Smoke_Temperature = 146.5,
-                Viscosity = 22,
                 Smelt_Temperature = 1521,
+                
+                Viscosity = 22,
+               
                 CO_Percentage = 8.7,
                 CO2_Percentage = 12.4,
                 N2_Percentage = 77.67,
-                O2_Percentage = 1.23
+                O2_Percentage = 1.23,
+
+                Gabbro = 6243,
+                Limestone = 350,
+                M_Limestone = 400,
+                Cocks = 1039,
+                Gas = 0,
+
+                SiO2 = 48.8,
+                Al2O3 = 12.94,
+                CaO = 21.87,
+                MgO = 12.33,
+                FeO = 3.25,
+
+                AverageWaterSteamTemperature = 155,
+                InputWaterWaste = 86.8,
+                OutputWaterWaste = 78.4,
             };
         }
 
