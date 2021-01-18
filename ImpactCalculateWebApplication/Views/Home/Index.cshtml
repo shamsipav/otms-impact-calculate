@@ -1,10 +1,7 @@
 ﻿@model List<InputDataModel>
 @{ ViewData["Title"] = "Home Page";
-    CocksModel cocksModel = new CocksModel();
     int id = IndexViewModel.LastID;
-
-    
-    }
+}
 
 
 @*<div class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -68,13 +65,78 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <label></label>
-                                <label for="идентификатор">Текст</label>
-                                <input id="L1" class="form-control" name="L1" type="text" value="">
+                                <table class="table table-responsive m-auto" style="width: fit-content;">
+                                    @*<thead>
+                                        <tr>
+                                            <th>Параметр</th>
+                                            <th>Значение</th>
+                                        </tr>
+                                    </thead>*@
+
+                                    <tr>
+                                        <td>
+                                            <label for="L1">L1</label>
+                                        </td>
+                                        <td>
+                                            <input id="L1" class="form-control" name="L1" type="text" value="">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <label for="L2">L2</label>
+                                        </td>
+                                        <td>
+                                            <input id="L2" class="form-control" name="L2" type="text" value="">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <label for="S1">S1</label>
+                                        </td>
+                                        <td>
+                                            <input id="S1" class="form-control" name="S1" type="text" value="">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <label for="S2">S2</label>
+                                        </td>
+                                        <td>
+                                            <input id="S2" class="form-control" name="S2" type="text" value="">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <label for="Wgr">Wgr</label>
+                                        </td>
+                                        <td>
+                                            <input id="Wgr" class="form-control" name="Wgr" type="text" value="">
+                                        </td>
+                                    </tr>
+                                </table>
+
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                                <button type="button" class="btn btn-primary">Сохранить</button>
+                                <div class="mr-auto">
+                                    <select name="selectedCocks" class="custom-select">
+                                        <option selected>Выбор кокса</option>
+
+                                        @{  
+                                            System.Reflection.PropertyInfo[] cocks = typeof(CocksModel).GetProperties();
+
+                                            for (int i = 0; i < cocks.Length; i++)
+                                            {
+                                                <option value="@((cocks[i].Name))">@(((Cocks)cocks[i].GetValue(null)).Name)</option>
+                                            }
+                                        }
+
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-secondary btn-success" data-dismiss="modal">Сохранить</button>
                             </div>
                         </div>
                     </div>
@@ -115,6 +177,8 @@
 
 
                     @{
+
+                        @*<td rowspan="13">1</td>*@
 
                         for (int i = 0; i < @Model.Count; i++)
                         {
@@ -356,9 +420,9 @@
         });
                     </script>
 
-                </table>
-                <button type="submit" id="Calculate" name="buttonType" class="btn btn-primary">Calculate</button>
+                                            </table>
+                                            <button type="submit" id="Calculate" name="buttonType" class="btn btn-primary">Calculate</button>
 
-            </form>
+</form>
         </div>        
     </div>

@@ -28,21 +28,21 @@ namespace ImpactCalculateWebApplication.Controllers
 
 
         [HttpPost]
-        public IActionResult Index(List<InputDataModel> input, Cocks selectedCocks, double L1, double L2, double S1, double S2, double Wgr)
+        public IActionResult Index(List<InputDataModel> input, string selectedCocks, double L1, double L2, double S1, double S2, double Wgr)
         {
             db.Inputs.RemoveRange(db.Inputs);
             db.Results.RemoveRange(db.Results);
 
             IndexViewModel viewModel = new IndexViewModel(input);
 
-                                      // Установить выбранный на форме кокс*
-            viewModel.selectedCocks = CocksModel.Kemerovo_3_4;
+            System.Reflection.PropertyInfo[] cocks = typeof(CocksModel).GetProperties();
+            viewModel.selectedCocks = (Cocks)cocks.First(x => x.Name == selectedCocks).GetValue(null);
 
-            //viewModel.L1 = L1;
-            //viewModel.L2 = L2;
-            //viewModel.S1 = S1;
-            //viewModel.S2 = S2;
-            //viewModel.Wgr = Wgr;
+            viewModel.L1 = L1;
+            viewModel.L2 = L2;
+            viewModel.S1 = S1;
+            viewModel.S2 = S2;
+            viewModel.Wgr = Wgr;
 
             viewModel.CalculateResults();
 
