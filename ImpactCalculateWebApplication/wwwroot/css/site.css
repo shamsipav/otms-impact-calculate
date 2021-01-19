@@ -134,3 +134,7 @@ html {
 .table-result tbody td p {
     margin: 0 !important;
 }
+
+.even-row {
+    background-color: #f1f1f1;
+}

@@ -4,6 +4,12 @@
 }
 
 <div class="result-content">
+
+    <div class="result-balance-controll fixed-bottom">
+        <button id="materialBalance" type="button" class="btn btn-secondary btn-success">Показать на тонну расплава</button>
+        <button id="percent" type="button" class="btn btn-secondary btn-success">Показать в %</button>
+    </div>
+
     <div class="result-container container-fluid d-flex flex-wrap">
         <div class="gas-content">
             <h1 class="h3">Расчёт по составу отводимых газов</h1>
@@ -166,7 +172,7 @@
         </div>
         <div class="material-balance-content d-flex flex-wrap">
             <div class="material-balance-coming-content">
-                <h1 class="h3">Материальный баланс (приход)</h1>
+                <h1 class="h3 material-balance-heading">Материальный баланс (приход), кг/ч</h1>
                 <table id="material-balance-coming-table" class="table table-result table-bordered table-responsive">
                     <thead>
                         <tr>
@@ -186,7 +192,7 @@
                             for (int i = 0; i < @Model.Results.Count; i++)
                             {
 
-                                <tr>
+                                <tr class="material-balance-hour">
                                     @if (i % 12 == 0)
                                     {
                                         <td rowspan="12">@(i/12+1)</td>
@@ -215,6 +221,37 @@
                                     </td>
                                 </tr>
 
+                            }
+
+                            for (int i = 0; i < @Model.Results.Count; i++)
+                            {
+                                <tr class="material-balance-tonn" style="display: none;">
+                                    @if (i % 12 == 0)
+                                    {
+                                        <td rowspan="12">@(i/12+1)</td>
+                                    }
+                                    <td>
+                                        <p class="text-center">@Math.Round((Model.Results[i].MaterialBalanceOnTonOfSmelt_Gabbro), 3)</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-center">@Math.Round((Model.Results[i].MaterialBalanceOnTonOfSmelt_Limestone), 3)</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-center">@Math.Round((Model.Results[i].MaterialBalanceOnTonOfSmelt_M_Limestone), 3)</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-center">@Math.Round((Model.Results[i].MaterialBalanceOnTonOfSmelt_Cocks), 3)</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-center">@Math.Round((Model.Results[i].MaterialBalanceOnTonOfSmelt_Gas), 3)</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-center">@Math.Round(Model.Results[i].MaterialBalanceOnTonOfSmelt_Air, 3)</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-center">@Math.Round(Model.Results[i].MaterialBalanceOnTonOfSmelt_SumPlus, 3)</p>
+                                    </td>
+                                </tr>
                             }
                         }
                     </tbody>
@@ -346,7 +383,7 @@
                         }
                     </tbody>
                 </table>
-            </div>
+            </div> 
             <div class="heat-balance-consumption-content">
                 <h1 class="h3">Тепловой баланс (расход)</h1>
                 <table id="heat-balance-consumption-table" class="table table-result table-bordered table-responsive">
