@@ -32,11 +32,11 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         public double AverageCocks { get { return Results.Select(x => x.MaterialBalance_Cocks).Sum() / Results.Count; } }
         public double AverageGas { get { return Results.Select(x => x.MaterialBalance_Gas).Sum() / Results.Count; } }
         //-----
-        public double AverageSiO2 { get { return Inputs.Select(x => x.SiO2).Sum() / Inputs.Count; } }
-        public double AverageAl2O3 { get { return Inputs.Select(x => x.Al2O3).Sum() / Inputs.Count; } }
-        public double AverageCaO { get { return Inputs.Select(x => x.CaO).Sum() / Inputs.Count; } }
-        public double AverageMgO { get { return Inputs.Select(x => x.MgO).Sum() / Inputs.Count; } }
-        public double AverageFeO { get { return Inputs.Select(x => x.FeO).Sum() / Inputs.Count; } }
+        public double AverageSiO2 { get { return Inputs.Select(x => x.SiO2).Sum() / Inputs.Count / 100d; } }
+        public double AverageAl2O3 { get { return Inputs.Select(x => x.Al2O3).Sum() / Inputs.Count / 100d; } }
+        public double AverageCaO { get { return Inputs.Select(x => x.CaO).Sum() / Inputs.Count / 100d; } }
+        public double AverageMgO { get { return Inputs.Select(x => x.MgO).Sum() / Inputs.Count / 100d; } }
+        public double AverageFeO { get { return Inputs.Select(x => x.FeO).Sum() / Inputs.Count / 100d; } }
 
         //----------------------------------------
 
