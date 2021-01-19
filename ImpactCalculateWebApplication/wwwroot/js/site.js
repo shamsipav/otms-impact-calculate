@@ -5,19 +5,6 @@
 
 $(document).ready(function () {
 
-    //$(".row-configure-button").click(function () {
-
-
-    //    let wHeight = $(window).height();
-    //    let bHeight = $("body").height();
-
-    //    if (bHeight > wHeight) {
-    //        $(".head").addClass("test");
-    //    } else {
-    //        $(".head").removeClass("test");
-    //    }
-    //})
-
     GetSizeOfTable();
     AddNewShift();
 

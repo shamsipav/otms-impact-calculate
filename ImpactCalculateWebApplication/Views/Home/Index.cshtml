@@ -48,10 +48,25 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
             <h1 class="h2">Исходные данные</h1>
             <div class="ml-3 mr-auto">
-                <button type="submit" id="AddRow" name="buttonType" class="row-configure-button btn btn-light btn-sm">Добавить</button>
+                <button onclick="AddRow()" type="submit" id="AddRow" name="buttonType" class="row-configure-button btn btn-light btn-sm">Добавить</button>
                 <button type="submit" id="RemoveRow" name="buttonType" class="row-configure-button btn btn-light btn-sm">Удалить</button>
             </div>
         </div>
+
+        <script>
+            function AddRow() {
+                $.ajax({
+                    url: "/Home/AddRow",
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function () {
+                        console.log("ошибка");
+                    }
+                });
+            }
+        </script>
+
         <form action="/Home/Index" method="post" class="input-form">
 
             <!-- Modal -->
@@ -294,11 +309,11 @@
                     // Добавление
                     $('#AddRow').on('click', function () {
 
-                            @{
+                            @*@{
                                 var newInput = InputDataModel.GetDefaultData();
                                 newInput.ID = Model.Count + 1;
                                 Model.Add(newInput);
-                            }
+                            }*@
                         let rowCount = $('#table tbody tr').length;
                         //rowCount++;
                         console.log(rowCount);
