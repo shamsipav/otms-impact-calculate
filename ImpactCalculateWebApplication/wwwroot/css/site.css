@@ -51,6 +51,14 @@ button.accept-policy {
   line-height: inherit;
 }
 
+/* Fix arrow in input type "number" */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -112,7 +120,17 @@ html {
     top: 0px;
 }*/
 
+.th-custom-padding {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
 
 
+/* Result CSS */
+.gas-content {
+    width: fit-content;
+}
 
-
+#gas-table tbody td p {
+    margin: 0 !important;
+}

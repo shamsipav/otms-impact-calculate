@@ -16,8 +16,6 @@ namespace ImpactCalculateWebApplication.Controllers
         private readonly ILogger<HomeController> _logger;
         private ImpactCalculationDBContext db = new ImpactCalculationDBContext();
 
-        //List<InputDataModel> InputData = new List<InputDataModel>();
-
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -26,15 +24,6 @@ namespace ImpactCalculateWebApplication.Controllers
         //------------------------------------------------------//
         //------------------------------------------------------//
         //------------------------------------------------------//
-
-        public ActionResult AddRow()
-        {
-            var newInput = InputDataModel.GetDefaultData();
-            //newInput.ID = InputData.Count + 1;
-            //InputData.Add(newInput);
-
-            return new JsonResult(newInput);
-        }
 
         [HttpPost]
         public IActionResult Index(List<InputDataModel> input, string selectedCocks, double L1, double L2, double S1, double S2, double Wgr)

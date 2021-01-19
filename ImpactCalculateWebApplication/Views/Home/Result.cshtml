@@ -3,6 +3,55 @@
     ViewData["Title"] = "Result";
 }
 
+<div class="result-content">
+    <div class="container-fluid">
+
+        <div class="gas-device-content">
+            <div class="gas-content">
+                <h1 class="h3">Параметры газа</h1>
+                <table id="gas-table" class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Смены</th>
+                            <th class="text-center">a<sup>газ</sup>, доли ед</th>
+                            <th class="text-center">Va<sup>г</sup>, м<sup>3</sup>/кг</th>
+                            <th class="text-center">V<sub>отх</sub><sup>г</sup>, м<sup>3</sup>/ч</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @{
+                            for (int i = 0; i < @Model.Results.Count; i++)
+                            {
+
+                                <tr>
+                                    @if (i % 12 == 0)
+                                    {
+                                        <td rowspan="12">@(i/12+1)</td>
+                                    }
+
+                                    <td>
+                                        <p class="text-center" name="[@i].Gas_A" type="text">@Math.Round(Model.Results[i].Gas_A, 3)</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-center" name="[@i].Gas_V_Alpha" type="text">@Math.Round(Model.Results[i].Gas_V_Alpha, 3)</p>
+                                    </td>
+                                    <td>
+                                        <p class="" name="[@i].Gas_V_Waste" type="text">@Math.Round(Model.Results[i].Gas_V_Waste, 3)</p>
+                                    </td>
+                                </tr>
+
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 <table id="table" class="table table-bordered table-responsive">
     <thead class="sticky-header">
         <tr>

@@ -48,24 +48,10 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
             <h1 class="h2">Исходные данные</h1>
             <div class="ml-3 mr-auto">
-                <button onclick="AddRow()" type="submit" id="AddRow" name="buttonType" class="row-configure-button btn btn-light btn-sm">Добавить</button>
+                <button type="submit" id="AddRow" name="buttonType" class="row-configure-button btn btn-light btn-sm">Добавить</button>
                 <button type="submit" id="RemoveRow" name="buttonType" class="row-configure-button btn btn-light btn-sm">Удалить</button>
             </div>
         </div>
-
-        <script>
-            function AddRow() {
-                $.ajax({
-                    url: "/Home/AddRow",
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error: function () {
-                        console.log("ошибка");
-                    }
-                });
-            }
-        </script>
 
         <form action="/Home/Index" method="post" class="input-form">
 
@@ -82,11 +68,11 @@
                         <div class="modal-body">
                             <table class="table table-responsive m-auto" style="width: fit-content;">
                                 @*<thead>
-                                <tr>
-                                    <th>Параметр</th>
-                                    <th>Значение</th>
-                                </tr>
-                            </thead>*@
+                                        <tr>
+                                            <th>Параметр</th>
+                                            <th>Значение</th>
+                                        </tr>
+                                    </thead>*@
 
                                 <tr>
                                     <td>
@@ -173,7 +159,7 @@
             </div>
 
             <table id="table" class="table table-bordered table-responsive">
-                <thead class="sticky-header">
+                <thead>
                     <tr>
                         <th>Смены</th>
                         <th>Расход воздуха, м3/ч</th>
@@ -187,21 +173,21 @@
                         <th>Содержание N2, %</th>
                         <th>Содержание O2, %</th>
 
-                        <th>Габро, кг/ч</th>
+                        <th class="th-custom-padding">Габро, кг/ч</th>
                         <th>Известняк, кг/ч</th>
                         <th>Марганцовистый известняк, кг/ч</th>
-                        <th>Кокс, кг/ч</th>
+                        <th class="th-custom-padding">Кокс, кг/ч</th>
                         <th>Природный газ, кг/ч</th>
 
-                        <th>SiO<sub>2</sub>, %</th>
-                        <th>Al<sub>2</sub>O<sub>3</sub>, %</th>
-                        <th>CaO, %</th>
-                        <th>MgO, %</th>
-                        <th>FeO, %</th>
+                        <th>Содержание SiO<sub>2</sub>, %</th>
+                        <th>Содержание Al<sub>2</sub>O<sub>3</sub>, %</th>
+                        <th>Содержание CaO, %</th>
+                        <th>Содержание MgO, %</th>
+                        <th>Содержание FeO, %</th>
 
-                        <th>Расход воды на входе</th>
-                        <th>Расход воды на выходе</th>
-                        <th>Ср. темп. пара-водяной смеси</th>
+                        <th class="th-custom-padding">Расход воды на входе</th>
+                        <th class="th-custom-padding">Расход воды на выходе</th>
+                        <th class="th-custom-padding">Ср. темп. пара-водяной смеси</th>
                     </tr>
                 </thead>
 
@@ -309,98 +295,94 @@
                     // Добавление
                     $('#AddRow').on('click', function () {
 
-                            @*@{
-                                var newInput = InputDataModel.GetDefaultData();
-                                newInput.ID = Model.Count + 1;
-                                Model.Add(newInput);
-                            }*@
                         let rowCount = $('#table tbody tr').length;
-                        //rowCount++;
+
                         console.log(rowCount);
 
                         if (rowCount % 12 == 0) {
-                            GetNewRowWithRowspan((rowCount / 12) + 1);
+                            let rowSpanValue = (rowCount / 12) + 1;
+                            GetNewRowWithRowspan(rowSpanValue, rowCount);
                         }
                         else {
                             $('#table tbody').append(`<tr>
 
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Spend" type="text" value=@Model[Model.Count - 1].Air_Spend>
+                                    <input class="form-control" name="[${rowCount}].Air_Spend" type="text" value=@Model[Model.Count - 1].Air_Spend>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Pressure" type="text" value=@Model[Model.Count - 1].Air_Pressure>
+                                    <input class="form-control" name="[${rowCount}].Air_Pressure" type="text" value=@Model[Model.Count - 1].Air_Pressure>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Temperature" type="text" value=@Model[Model.Count - 1].Air_Temperature>
+                                    <input class="form-control" name="[${rowCount}].Air_Temperature" type="text" value=@Model[Model.Count - 1].Air_Temperature>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Smoke_Temperature" type="text" value=@Model[Model.Count - 1].Smoke_Temperature>
+                                    <input class="form-control" name="[${rowCount}].Smoke_Temperature" type="text" value=@Model[Model.Count - 1].Smoke_Temperature>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Viscosity" type="text" value=@Model[Model.Count - 1].Viscosity>
+                                    <input class="form-control" name="[${rowCount}].Viscosity" type="text" value=@Model[Model.Count - 1].Viscosity>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Smelt_Temperature" type="text" value=@Model[Model.Count - 1].Smelt_Temperature>
+                                    <input class="form-control" name="[${rowCount}].Smelt_Temperature" type="text" value=@Model[Model.Count - 1].Smelt_Temperature>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].CO_Percentage" type="text" value=@Model[Model.Count - 1].CO_Percentage>
+                                    <input class="form-control" name="[${rowCount}].CO_Percentage" type="text" value=@Model[Model.Count - 1].CO_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].CO2_Percentage" type="text" value=@Model[Model.Count - 1].CO2_Percentage>
+                                    <input class="form-control" name="[${rowCount}].CO2_Percentage" type="text" value=@Model[Model.Count - 1].CO2_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].N2_Percentage" type="text" value=@Model[Model.Count - 1].N2_Percentage>
+                                    <input class="form-control" name="[${rowCount}].N2_Percentage" type="text" value=@Model[Model.Count - 1].N2_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].O2_Percentage" type="text" value=@Model[Model.Count - 1].O2_Percentage>
+                                    <input class="form-control" name="[${rowCount}].O2_Percentage" type="text" value=@Model[Model.Count - 1].O2_Percentage>
                                 </td>
 
                                 @* РАСХОД МАТЕРИАЛОВ *@
 
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Gabbro" type="text" value=@Model[Model.Count - 1].Gabbro>
+                                    <input class="form-control" name="[${rowCount}].Gabbro" type="text" value=@Model[Model.Count - 1].Gabbro>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Limestone" type="text" value=@Model[Model.Count - 1].Limestone>
+                                    <input class="form-control" name="[${rowCount}].Limestone" type="text" value=@Model[Model.Count - 1].Limestone>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].M_Limestone" type="text" value=@Model[Model.Count - 1].M_Limestone>
+                                    <input class="form-control" name="[${rowCount}].M_Limestone" type="text" value=@Model[Model.Count - 1].M_Limestone>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Cocks" type="text" value=@Model[Model.Count - 1].Cocks>
+                                    <input class="form-control" name="[${rowCount}].Cocks" type="text" value=@Model[Model.Count - 1].Cocks>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Gas" type="text" value=@Model[Model.Count - 1].Gas>
+                                    <input class="form-control" name="[${rowCount}].Gas" type="text" value=@Model[Model.Count - 1].Gas>
                                 </td>
 
                                 @* СОДЕРЖАНИЕ ОКСИДОЕ *@
 
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].SiO2" type="text" value=@Model[Model.Count - 1].SiO2>
+                                    <input class="form-control" name="[${rowCount}].SiO2" type="text" value=@Model[Model.Count - 1].SiO2>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Al2O3" type="text" value=@Model[Model.Count - 1].Al2O3>
+                                    <input class="form-control" name="[${rowCount}].Al2O3" type="text" value=@Model[Model.Count - 1].Al2O3>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].CaO" type="text" value=@Model[Model.Count - 1].CaO>
+                                    <input class="form-control" name="[${rowCount}].CaO" type="text" value=@Model[Model.Count - 1].CaO>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].MgO" type="text" value=@Model[Model.Count - 1].MgO>
+                                    <input class="form-control" name="[${rowCount}].MgO" type="text" value=@Model[Model.Count - 1].MgO>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].FeO" type="text" value=@Model[Model.Count - 1].FeO>
+                                    <input class="form-control" name="[${rowCount}].FeO" type="text" value=@Model[Model.Count - 1].FeO>
                                 </td>
 
                                 @* ПАРАМЕТРЫ ОХЛАЖДАЮЩЕЙ ВОДЫ *@
 
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].InputWaterWaste" type="text" value=@Model[Model.Count - 1].InputWaterWaste>
+                                    <input class="form-control" name="[${rowCount}].InputWaterWaste" type="text" value=@Model[Model.Count - 1].InputWaterWaste>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].OutputWaterWaste" type="text" value=@Model[Model.Count - 1].OutputWaterWaste>
+                                    <input class="form-control" name="[${rowCount}].OutputWaterWaste" type="text" value=@Model[Model.Count - 1].OutputWaterWaste>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].AverageWaterSteamTemperature" type="text" value=@Model[Model.Count - 1].AverageWaterSteamTemperature>
+                                    <input class="form-control" name="[${rowCount}].AverageWaterSteamTemperature" type="text" value=@Model[Model.Count - 1].AverageWaterSteamTemperature>
                                 </td>
 
                             </tr>`);
@@ -411,204 +393,107 @@
                     });
 
 
-                    function GetNewRowWithRowspan(rowSpanValue) {
+                    function GetNewRowWithRowspan(rowSpanValue, rowCount) {
                         $('#table tbody').append(`<tr>
 
                                 <td rowspan="12">${rowSpanValue}</td>
 
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Spend" type="text" value=@Model[Model.Count - 1].Air_Spend>
+                                    <input class="form-control" name="[${rowCount}].Air_Spend" type="text" value=@Model[Model.Count - 1].Air_Spend>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Pressure" type="text" value=@Model[Model.Count - 1].Air_Pressure>
+                                    <input class="form-control" name="[${rowCount}].Air_Pressure" type="text" value=@Model[Model.Count - 1].Air_Pressure>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Temperature" type="text" value=@Model[Model.Count - 1].Air_Temperature>
+                                    <input class="form-control" name="[${rowCount}].Air_Temperature" type="text" value=@Model[Model.Count - 1].Air_Temperature>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Smoke_Temperature" type="text" value=@Model[Model.Count - 1].Smoke_Temperature>
+                                    <input class="form-control" name="[${rowCount}].Smoke_Temperature" type="text" value=@Model[Model.Count - 1].Smoke_Temperature>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Viscosity" type="text" value=@Model[Model.Count - 1].Viscosity>
+                                    <input class="form-control" name="[${rowCount}].Viscosity" type="text" value=@Model[Model.Count - 1].Viscosity>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Smelt_Temperature" type="text" value=@Model[Model.Count - 1].Smelt_Temperature>
+                                    <input class="form-control" name="[${rowCount}].Smelt_Temperature" type="text" value=@Model[Model.Count - 1].Smelt_Temperature>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].CO_Percentage" type="text" value=@Model[Model.Count - 1].CO_Percentage>
+                                    <input class="form-control" name="[${rowCount}].CO_Percentage" type="text" value=@Model[Model.Count - 1].CO_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].CO2_Percentage" type="text" value=@Model[Model.Count - 1].CO2_Percentage>
+                                    <input class="form-control" name="[${rowCount}].CO2_Percentage" type="text" value=@Model[Model.Count - 1].CO2_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].N2_Percentage" type="text" value=@Model[Model.Count - 1].N2_Percentage>
+                                    <input class="form-control" name="[${rowCount}].N2_Percentage" type="text" value=@Model[Model.Count - 1].N2_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].O2_Percentage" type="text" value=@Model[Model.Count - 1].O2_Percentage>
+                                    <input class="form-control" name="[${rowCount}].O2_Percentage" type="text" value=@Model[Model.Count - 1].O2_Percentage>
                                 </td>
 
                                 @* РАСХОД МАТЕРИАЛОВ *@
 
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Gabbro" type="text" value=@Model[Model.Count - 1].Gabbro>
+                                    <input class="form-control" name="[${rowCount}].Gabbro" type="text" value=@Model[Model.Count - 1].Gabbro>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Limestone" type="text" value=@Model[Model.Count - 1].Limestone>
+                                    <input class="form-control" name="[${rowCount}].Limestone" type="text" value=@Model[Model.Count - 1].Limestone>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].M_Limestone" type="text" value=@Model[Model.Count - 1].M_Limestone>
+                                    <input class="form-control" name="[${rowCount}].M_Limestone" type="text" value=@Model[Model.Count - 1].M_Limestone>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Cocks" type="text" value=@Model[Model.Count - 1].Cocks>
+                                    <input class="form-control" name="[${rowCount}].Cocks" type="text" value=@Model[Model.Count - 1].Cocks>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Gas" type="text" value=@Model[Model.Count - 1].Gas>
+                                    <input class="form-control" name="[${rowCount}].Gas" type="text" value=@Model[Model.Count - 1].Gas>
                                 </td>
 
                                 @* СОДЕРЖАНИЕ ОКСИДОЕ *@
 
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].SiO2" type="text" value=@Model[Model.Count - 1].SiO2>
+                                    <input class="form-control" name="[${rowCount}].SiO2" type="text" value=@Model[Model.Count - 1].SiO2>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Al2O3" type="text" value=@Model[Model.Count - 1].Al2O3>
+                                    <input class="form-control" name="[${rowCount}].Al2O3" type="text" value=@Model[Model.Count - 1].Al2O3>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].CaO" type="text" value=@Model[Model.Count - 1].CaO>
+                                    <input class="form-control" name="[${rowCount}].CaO" type="text" value=@Model[Model.Count - 1].CaO>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].MgO" type="text" value=@Model[Model.Count - 1].MgO>
+                                    <input class="form-control" name="[${rowCount}].MgO" type="text" value=@Model[Model.Count - 1].MgO>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].FeO" type="text" value=@Model[Model.Count - 1].FeO>
+                                    <input class="form-control" name="[${rowCount}].FeO" type="text" value=@Model[Model.Count - 1].FeO>
                                 </td>
 
                                 @* ПАРАМЕТРЫ ОХЛАЖДАЮЩЕЙ ВОДЫ *@
 
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].InputWaterWaste" type="text" value=@Model[Model.Count - 1].InputWaterWaste>
+                                    <input class="form-control" name="[${rowCount}].InputWaterWaste" type="text" value=@Model[Model.Count - 1].InputWaterWaste>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].OutputWaterWaste" type="text" value=@Model[Model.Count - 1].OutputWaterWaste>
+                                    <input class="form-control" name="[${rowCount}].OutputWaterWaste" type="text" value=@Model[Model.Count - 1].OutputWaterWaste>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].AverageWaterSteamTemperature" type="text" value=@Model[Model.Count - 1].AverageWaterSteamTemperature>
+                                    <input class="form-control" name="[${rowCount}].AverageWaterSteamTemperature" type="text" value=@Model[Model.Count - 1].AverageWaterSteamTemperature>
                                 </td>
 
                             </tr>`);
                     }
 
-                    // Удаление
-
+                    // УДАЛЕНИЕ
                     $('#RemoveRow').on('click', function () {
-
                         let rowCount = $('#table tbody tr').length;
 
-                        if (rowCount > 2) {
-
-                            document.getElementsByTagName("tr")[rowCount].remove();
-
-                            if (rowCount % 12 == 0) {
-
-                                $('tbody').remove(`<tr>
-
-                                <td rowspan="12">${rowSpanValue}</td>
-
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Spend" type="text" value=@Model[Model.Count - 1].Air_Spend>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Pressure" type="text" value=@Model[Model.Count - 1].Air_Pressure>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Air_Temperature" type="text" value=@Model[Model.Count - 1].Air_Temperature>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Smoke_Temperature" type="text" value=@Model[Model.Count - 1].Smoke_Temperature>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Viscosity" type="text" value=@Model[Model.Count - 1].Viscosity>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Smelt_Temperature" type="text" value=@Model[Model.Count - 1].Smelt_Temperature>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].CO_Percentage" type="text" value=@Model[Model.Count - 1].CO_Percentage>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].CO2_Percentage" type="text" value=@Model[Model.Count - 1].CO2_Percentage>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].N2_Percentage" type="text" value=@Model[Model.Count - 1].N2_Percentage>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].O2_Percentage" type="text" value=@Model[Model.Count - 1].O2_Percentage>
-                                </td>
-
-                                @* РАСХОД МАТЕРИАЛОВ *@
-
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Gabbro" type="text" value=@Model[Model.Count - 1].Gabbro>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Limestone" type="text" value=@Model[Model.Count - 1].Limestone>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].M_Limestone" type="text" value=@Model[Model.Count - 1].M_Limestone>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Cocks" type="text" value=@Model[Model.Count - 1].Cocks>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Gas" type="text" value=@Model[Model.Count - 1].Gas>
-                                </td>
-
-                                @* СОДЕРЖАНИЕ ОКСИДОЕ *@
-
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].SiO2" type="text" value=@Model[Model.Count - 1].SiO2>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].Al2O3" type="text" value=@Model[Model.Count - 1].Al2O3>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].CaO" type="text" value=@Model[Model.Count - 1].CaO>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].MgO" type="text" value=@Model[Model.Count - 1].MgO>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].FeO" type="text" value=@Model[Model.Count - 1].FeO>
-                                </td>
-
-                                @* ПАРАМЕТРЫ ОХЛАЖДАЮЩЕЙ ВОДЫ *@
-
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].InputWaterWaste" type="text" value=@Model[Model.Count - 1].InputWaterWaste>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].OutputWaterWaste" type="text" value=@Model[Model.Count - 1].OutputWaterWaste>
-                                </td>
-                                <td>
-                                    <input class="form-control" name="[@(Model.Count - 1)].AverageWaterSteamTemperature" type="text" value=@Model[Model.Count - 1].AverageWaterSteamTemperature>
-                                </td>
-
-                            </tr>`);
-
-                                shiftCount--;
-                            }
-
-                            rowCount--;
-
-                            $(@{Model.RemoveAt(Model.Count - 1);})
+                        if (rowCount > 1) {
+                            $('#table tbody tr:last').remove();
+                            // УДАЛИТЬ ИЗ МОДЕЛИ
                         }
                     });
-
-
 
                 });
             </script>
         </form>
     </div>
 </div>
+
 
