@@ -127,10 +127,10 @@ html {
 
 
 /* Result CSS */
-.gas-content {
+.table-result {
     width: fit-content;
 }
 
-#gas-table tbody td p {
+.table-result tbody td p {
     margin: 0 !important;
 }
