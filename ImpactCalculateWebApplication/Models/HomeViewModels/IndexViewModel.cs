@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ImpactCalculateWebApplication.Models.HomeViewModels
 {
 
     public class IndexViewModel
-    {      
+    {
         public static int LastID = 1;
         public Cocks selectedCocks = CocksModel.Kemerovo_3_4;
 
@@ -37,7 +38,6 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         public double AverageCaO { get { return Inputs.Select(x => x.CaO).Sum() / Inputs.Count / 100d; } }
         public double AverageMgO { get { return Inputs.Select(x => x.MgO).Sum() / Inputs.Count / 100d; } }
         public double AverageFeO { get { return Inputs.Select(x => x.FeO).Sum() / Inputs.Count / 100d; } }
-
         //----------------------------------------
 
         //Percents Of M_Limestone:
@@ -49,6 +49,13 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
 
         public List<InputDataModel> Inputs { get; set; }
         public List<ResultDataModel> Results { get; set; }
+
+        // Данные для графика
+        public ChartData Chart => new ChartData()
+        {
+            lables_Json = JsonConvert.SerializeObject(Results.Select(x => x.MaterialBalance_M_Limestone * x.MaterialBalance_SumPlus / 100)),
+            data_Json = JsonConvert.SerializeObject(Results.Select(x => x.TeploBalanceOnTonOfSmelt_SumPlus))
+        };
 
         public IndexViewModel(List<InputDataModel> inputs)
         {
@@ -79,10 +86,10 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
             //Q-шки
             result.qCO = -0.0000000165d * Math.Pow(input.Smoke_Temperature, 3) + 0.0000120241d * Math.Pow(input.Smoke_Temperature, 2)
                          - 0.0043796347d * input.Smoke_Temperature + 1.2486284818d;
-            result.qCO2 = 0.00000007d * Math.Pow(input.Smoke_Temperature, 2)+ 0.00005d * input.Smoke_Temperature + 1.256d;
+            result.qCO2 = 0.00000007d * Math.Pow(input.Smoke_Temperature, 2) + 0.00005d * input.Smoke_Temperature + 1.256d;
             result.qO2 = -0.0000000206d * Math.Pow(input.Smoke_Temperature, 3) + 0.000014366d * Math.Pow(input.Smoke_Temperature, 2)
                          - 0.0050555626d * input.Smoke_Temperature + 1.4267518409d;
-            result.qN2 = -0.0000000164d * Math.Pow(input.Smoke_Temperature, 3) + 0.0000119935d * Math.Pow(input.Smoke_Temperature, 2) 
+            result.qN2 = -0.0000000164d * Math.Pow(input.Smoke_Temperature, 3) + 0.0000119935d * Math.Pow(input.Smoke_Temperature, 2)
                          - 0.0043758306d * input.Smoke_Temperature + 1.2486235488d;
             result.qSum = (result.qCO * input.CO_Percentage + result.qCO2 * input.CO2_Percentage + result.qN2 * input.N2_Percentage + result.qO2 * input.O2_Percentage) / 100d;
             //------------------
@@ -116,7 +123,7 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
             double _A = 1f / (1f - 3.76f * (input.O2_Percentage - 0.5f * input.CO_Percentage) / input.N2_Percentage);
             double _V_Alpha = L0 * _A + DeltaV;
             double _V_Waste = input.Cocks * ((12d / 22.4d) * input.CO_Percentage + (12d / 22.4d) * input.CO2_Percentage);
-           
+
             result.Gas_A = _A;
             result.Gas_V_Alpha = _V_Alpha;
             result.Gas_V_Waste = _V_Waste;
@@ -176,8 +183,8 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
         {
             var Gas = 33500d * input.Gas / 3600d;
             var Cocks = input.Cocks * Cocks_Combustion_Temperature / 3600d;
-            var Air = input.Air_Spend * (0.00000009d * input.Air_Temperature * input.Air_Temperature + 0.00004d * input.Air_Temperature + 1.296d)* input.Air_Temperature / 3600d;
-           
+            var Air = input.Air_Spend * (0.00000009d * input.Air_Temperature * input.Air_Temperature + 0.00004d * input.Air_Temperature + 1.296d) * input.Air_Temperature / 3600d;
+
             var SumPlus = Gas + Cocks + Air;
 
 
@@ -225,7 +232,7 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
             result.TeploBalance_Endoterm_Reactions = Endoterm_Reactions;
             result.TeploBalance_CoolingWater = CoolingWater;
             result.TeploBalance_SumWaste = SumWaste;
-            
+
         }
         public void CalcTeploBalanceOnTonOfSmelt(InputDataModel input, ResultDataModel result)
         {
@@ -261,5 +268,13 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
             result.TeploBalanceOnTonOfSmelt_CoolingWater = CoolingWater;
             result.TeploBalanceOnTonOfSmelt_SumWaste = SumWaste;
         }
+
+        public class ChartData
+        {
+            public string lables_Json;
+            public string data_Json;
+        }
     }
+
+
 }

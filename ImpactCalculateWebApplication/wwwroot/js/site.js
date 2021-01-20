@@ -38,25 +38,59 @@ $(document).ready(function () {
 
     function Test() {
 
-        $(".gas-content").keyup(function () {
-
-            let gasContentInputs = $(this).parent("td").parent("tr").find(".gas-content");
+        for (let i = 0; i < $(".gas-content").length; i++) {
+            let gasContentInputs = $(".gas-content").eq(i).parent("td").parent("tr").find(".gas-content");
 
             let summ = 0;
+
             for (let i = 0; i < gasContentInputs.length; i++) {
                 let value = gasContentInputs.eq(i).val().replace(',', '.');
                 summ += parseFloat(value);
             }
 
-            if (summ != 100) {
-                console.log("ТЫ ЧЕ ОКУРОК БЛЯТЬ ПРОЦЕНТОВ СТО ДОЛЖНО БЫТЬ, А У ТЕБЯ ВСЕГО ЛИШЬ " + summ)
+            summFixed = summ.toFixed(9) == 100;
+
+            if (!summFixed) {
+                gasContentInputs.removeClass("is-valid");
+                gasContentInputs.addClass("is-invalid");
             } else {
-                console.log("ПОВЕЗЛО ТЕБЕ СУЧЕНЫШ А НУ МАРШ ПОД ШКОНКУ" + summ);
+                gasContentInputs.removeClass("is-invalid");
+                gasContentInputs.addClass("is-valid");
+            }
+           
+            if (!$("#Calculate").prop("disabled")) {
+                BlockResultButton(!summFixed);
+            }
+        }
+
+
+        $(".gas-content").keyup(function () {
+
+            let gasContentInputs = $(this).parent("td").parent("tr").find(".gas-content");
+
+            let summ = 0;
+
+            for (let i = 0; i < gasContentInputs.length; i++) {
+                let value = gasContentInputs.eq(i).val().replace(',', '.');
+                summ += parseFloat(value);
             }
 
-            //console.log(summ);
+            let summFixed = summ.toFixed(9) == 100;
 
+            if (!summFixed) {
+                gasContentInputs.removeClass("is-valid");
+                gasContentInputs.addClass("is-invalid");
+            } else {
+                gasContentInputs.removeClass("is-invalid");
+                gasContentInputs.addClass("is-valid");
+            }
+
+            BlockResultButton(!summFixed);
         })
+    }
+
+    function BlockResultButton(parameter) {
+        $("#Calculate").prop("disabled", parameter);
     }
 
     //for (let i = 0; i < $(".table").length; i++) {

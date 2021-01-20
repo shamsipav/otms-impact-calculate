@@ -112,7 +112,7 @@ html {
 
 .table.overflow-y {
     overflow-y: auto;
-    height: 400px;
+    height: 395px;
 }
 
 /*.table thead th {
@@ -155,4 +155,8 @@ html {
     opacity: 0;
     visibility: hidden;
     display: none;
+}
+
+.graphic-content {
+    width: 500px;
 }
