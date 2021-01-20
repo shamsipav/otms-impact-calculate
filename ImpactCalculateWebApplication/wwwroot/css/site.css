@@ -125,6 +125,12 @@ html {
     padding-right: 30px !important;
 }
 
+.table th {
+    position: sticky;
+    top: -1px;
+    background-color: #fff;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
 
 /* Result CSS */
 .table-result {

@@ -4,41 +4,21 @@
 }
 
 
-@*<div class="col-md-2 d-none d-md-block bg-light sidebar">
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Постоянные величины</span>
-
-        </h6>
-        <div class="dropdown d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
-            <button class="btn btn-light btn-sm dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Выбор кокса
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                @{ System.Reflection.PropertyInfo[] cocks = cocksModel.GetType().GetProperties();
-
-                    for (int i = 0; i < cocks.Length; i++)
-                    {
-                        <a class="dropdown-item" href="#@(((Cocks)cocks[i].GetValue(cocksModel)).Q)">@(((Cocks)cocks[i].GetValue(cocksModel)).Name)</a> } }
-            </div>
-        </div>
-        <div class="px-3 mt-4 mb-">
-            <button type="submit" id="AddRow" name="buttonType" class="btn btn-light btn-sm">Добавить строку</button>
-            <button type="submit" id="RemoveRow" name="buttonType" class="btn btn-light btn-sm">Удалить строку</button>
-        </div>
-    </div>*@
-
-<section class="head py-5 text-center container">
+<section class="head text-center container">
     <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">Album example</h1>
+        <div class="col-lg-7 col-md-8 mx-auto">
+            <h1 class="fw-light">Исследование тепловой работы обжигового шахтного агрегата</h1>
             <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
                 Насройка параметров
             </button>
 
+        </div>
+
+        <div class="col-lg-7 col-md-8 mx-auto py-3">
+            <button type="submit" onclick="submitForm()" id="Calculate" name="buttonType" class="btn btn-primary btn-lg">Рассчитать</button>
         </div>
     </div>
 </section>
@@ -53,7 +33,7 @@
             </div>
         </div>
 
-        <form action="/Home/Index" method="post" class="input-form">
+        <form action="/Home/Index" id="inputForm" method="post" class="input-form">
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -161,17 +141,17 @@
             <table id="table" class="table table-bordered table-responsive">
                 <thead>
                     <tr>
-                        <th>Смены</th>
-                        <th>Расход воздуха, м3/ч</th>
-                        <th>Давление воздуха, мбар</th>
-                        <th>Температура подогрева воздуха, *C</th>
-                        <th>Температура отходящих газов, *C</th>
-                        <th>Вязкость, усл. ед.</th>
-                        <th>Температура расплава, *C</th>
-                        <th>Содержание CO, %</th>
-                        <th>Содержание CO2, %</th>
-                        <th>Содержание N2, %</th>
-                        <th>Содержание O2, %</th>
+                        <th class="text-center">Смены</th>
+                        <th class="text-center">Расход воздуха, м3/ч</th>
+                        <th class="text-center">Давление воздуха, мбар</th>
+                        <th class="text-center">Температура подогрева воздуха, *C</th>
+                        <th class="text-center">Температура отходящих газов, *C</th>
+                        <th class="text-center">Вязкость, усл. ед.</th>
+                        <th class="text-center">Температура расплава, *C</th>
+                        <th class="text-center">Содержание CO, %</th>
+                        <th class="text-center">Содержание CO2, %</th>
+                        <th class="text-center">Содержание N2, %</th>
+                        <th class="text-center">Содержание O2, %</th>
 
                         <th class="th-custom-padding">Габро, кг/ч</th>
                         <th>Известняк, кг/ч</th>
@@ -225,16 +205,16 @@
                                 <input class="form-control" name="[@i].Smelt_Temperature" type="text" value=@Model[i].Smelt_Temperature>
                             </td>
                             <td>
-                                <input class="form-control" name="[@i].CO_Percentage" type="text" value=@Model[i].CO_Percentage>
+                                <input class="form-control gas-content" name="[@i].CO_Percentage" type="text" value=@Model[i].CO_Percentage>
                             </td>
                             <td>
-                                <input class="form-control" name="[@i].CO2_Percentage" type="text" value=@Model[i].CO2_Percentage>
+                                <input class="form-control gas-content" name="[@i].CO2_Percentage" type="text" value=@Model[i].CO2_Percentage>
                             </td>
                             <td>
-                                <input class="form-control" name="[@i].N2_Percentage" type="text" value=@Model[i].N2_Percentage>
+                                <input class="form-control gas-content" name="[@i].N2_Percentage" type="text" value=@Model[i].N2_Percentage>
                             </td>
                             <td>
-                                <input class="form-control" name="[@i].O2_Percentage" type="text" value=@Model[i].O2_Percentage>
+                                <input class="form-control gas-content" name="[@i].O2_Percentage" type="text" value=@Model[i].O2_Percentage>
                             </td>
 
                             @* РАСХОД МАТЕРИАЛОВ *@
@@ -288,7 +268,7 @@
                     }
                 }
             </table>
-            <button type="submit" id="Calculate" name="buttonType" class="btn btn-primary">Calculate</button>
+
 
             <script>
                 $(document).ready(function () {
@@ -495,5 +475,9 @@
         </form>
     </div>
 </div>
+
+
+
+
 
 

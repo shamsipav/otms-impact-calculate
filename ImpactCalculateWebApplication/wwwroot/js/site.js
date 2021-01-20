@@ -3,6 +3,10 @@
 
 // Write your JavaScript code.
 
+function submitForm() {
+    $("#inputForm").submit();
+}
+
 $(document).ready(function () {
 
     GetSizeOfTable();
@@ -19,12 +23,39 @@ $(document).ready(function () {
     function AddNewShift() {
         $("#AddRow").click(function () {
             let rowCount = $('#table tbody tr').length;
+
             $("#table").scrollTop($("#table")[0].scrollHeight);
-            SetEvenClassOnTable("#table tbody tr");
+
+            SetEvenClassOnTable("#table");
 
             if (rowCount > 4) {
                 $(".table").addClass("overflow-y");
             }
+        })
+    }
+
+    Test();
+
+    function Test() {
+
+        $(".gas-content").keyup(function () {
+
+            let gasContentInputs = $(this).parent("td").parent("tr").find(".gas-content");
+
+            let summ = 0;
+            for (let i = 0; i < gasContentInputs.length; i++) {
+                let value = gasContentInputs.eq(i).val().replace(',', '.');
+                summ += parseFloat(value);
+            }
+
+            if (summ != 100) {
+                console.log("ТЫ ЧЕ ОКУРОК БЛЯТЬ ПРОЦЕНТОВ СТО ДОЛЖНО БЫТЬ, А У ТЕБЯ ВСЕГО ЛИШЬ " + summ)
+            } else {
+                console.log("ПОВЕЗЛО ТЕБЕ СУЧЕНЫШ А НУ МАРШ ПОД ШКОНКУ" + summ);
+            }
+
+            //console.log(summ);
+
         })
     }
 
