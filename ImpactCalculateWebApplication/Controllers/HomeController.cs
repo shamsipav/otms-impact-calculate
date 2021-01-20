@@ -8,6 +8,7 @@ using ImpactCalculateWebApplication.Models;
 using ImpactCalculateWebApplication.Models.HomeViewModels;
 using Newtonsoft.Json;
 using System.IO;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace ImpactCalculateWebApplication.Controllers
 {
@@ -21,8 +22,6 @@ namespace ImpactCalculateWebApplication.Controllers
             _logger = logger;
         }
 
-        //------------------------------------------------------//
-        //------------------------------------------------------//
         //------------------------------------------------------//
 
         [HttpPost]
@@ -61,26 +60,25 @@ namespace ImpactCalculateWebApplication.Controllers
 
         public IActionResult Index()
         {
-            StreamReader sr = new StreamReader(@"jija.json");
-            var settings = JsonConvert.DeserializeObject<SettingsModel>(sr.ReadToEnd());
-            sr.Close();
+            SettingsModel settings;
 
-            //SettingsModel settings = new SettingsModel() { L1 = 0.2627d, L2 = 0.07d, S1 = 0.4d, S2 = 0.0086d, Wgr = 12d, SelectedCocks = "Kemerovo_3_4" };
-
-            //List<InputDataModel> Inputs = new List<InputDataModel>()
-            //{
-            //    InputDataModel.GetDefaultData()
-            //};
+            try
+            {
+                StreamReader sr = new StreamReader(@"jija.json");
+                settings = JsonConvert.DeserializeObject<SettingsModel>(sr.ReadToEnd());
+                sr.Close();
+            }
+            catch
+            {
+                settings = new SettingsModel() { L1 = 0.2627d, L2 = 0.07d, S1 = 0.4d, S2 = 0.0086d, Wgr = 12d, SelectedCocks = "Kemerovo_3_4" };
+            }
 
             var Inputs = db.Inputs.ToList();
-
     
             ViewBag.settings = settings;
             return View(Inputs);
         }
 
-        //------------------------------------------------------//
-        //------------------------------------------------------//
         //------------------------------------------------------//
 
         public IActionResult Privacy()

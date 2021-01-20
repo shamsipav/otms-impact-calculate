@@ -11,6 +11,7 @@ $(document).ready(function () {
 
     GetSizeOfTable();
     AddNewShift();
+    inputsValidate();
 
     function GetSizeOfTable() {
         let rowCount = $('#table tbody tr').length;
@@ -56,8 +57,6 @@ $(document).ready(function () {
             BlockResultButton(!summFixed);
         })
     }
-
-    inputsValidate();
 
     function inputsValidate() {
 
@@ -196,23 +195,10 @@ $(document).ready(function () {
         }
     }
 
-    //let rowCount = $(`${table} tbody tr`).length;
-
-    //for (let i = 0; i < rowCount; i++) {
-    //    if (i % 12 == 0) {
-    //        let rowSpanValue = (i / 12) + 1;
-
-    //        if (rowSpanValue % 2 == 0) {
-    //            $(`${table} tbody tr td:first-child`).eq(i).addClass("even-row");
-    //        }
-    //    }
-    //}
-
  
     $('.table-result').hover(function () {
         $('.table-result').addClass("no-scroll");
         $(this).removeClass("no-scroll");
-        //console.log($(this).attr("id"));
     });
 
     $(".table-result").on('scroll', function () {
@@ -278,14 +264,12 @@ $(document).ready(function () {
             $(".table-balance-tonn").addClass("table-hide");
             $(".table-balance-hour").addClass("table-hide");
 
-            // тут получаеца не надо "на час" надо просто у таблицы процента убрать hide окс (и получаеца что таблиц % не 2 а 1 на каждую жыжу)
             $(".table-balance-percent").removeClass("table-hide");
         } else {
 
             $(".table-balance-percent").addClass("table-hide");
 
             if (kiloPerHour) {
-                //$("#balanceConfigure").text("Показать на тонну расплава");
                 $(".material-balance-coming-heading").text("Материальный баланс (приход), кг/ч");
                 $(".material-balance-consumption-heading").text("Материальный баланс (расход), кг/ч");
 
@@ -295,7 +279,6 @@ $(document).ready(function () {
                 $(".table-balance-tonn").addClass("table-hide");
                 $(".table-balance-hour").removeClass("table-hide");
             } else {
-                //$("#balanceConfigure").text("Показать в час");
                 $(".material-balance-coming-heading").text("Материальный баланс (приход), кг/т");
                 $(".material-balance-consumption-heading").text("Материальный баланс (расход), кг/т");
 
