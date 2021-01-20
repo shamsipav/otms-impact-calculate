@@ -139,12 +139,13 @@ $(document).ready(function () {
 
         percent = !percent;
 
-        if (kiloPerHour && percent) {
+        if (percent) {
             $(".material-balance-coming-heading").text("Материальный баланс (приход), % (кг/ч)");
 
             $(".table-balance-tonn").addClass("table-hide");
             $(".table-balance-hour").addClass("table-hide");
 
+            // тут получаеца не надо "на час" надо просто у таблицы процента убрать hide окс (и получаеца что таблиц % не 2 а 1 на каждую жыжу)
             $(".table-balance-percent-hour").removeClass("table-hide");
         } else {
 
