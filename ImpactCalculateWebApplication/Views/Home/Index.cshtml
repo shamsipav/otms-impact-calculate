@@ -8,8 +8,7 @@
     <div class="row py-lg-5">
         <div class="col-lg-7 col-md-8 mx-auto">
             <h1 class="fw-light">Исследование тепловой работы обжигового шахтного агрегата</h1>
-            <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-
+            <p class="lead text-muted mb-4">В результате расчета определяются тепловой и материальный балансы работы обжигового шахтного агрегата, а также зависимость суммарного прихода тепла от процентного содержания марганцовистого известняка</p>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
                 Насройка параметров
@@ -46,7 +45,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <table class="table table-responsive m-auto" style="width: fit-content;">
+                            <table class="table table-modal table-responsive m-auto" style="width: fit-content;">
                                 @*<thead>
                                         <tr>
                                             <th>Параметр</th>
@@ -103,9 +102,8 @@
                         </div>
                         <div class="modal-footer">
                             <div class="mr-auto">
+                                <p style="margin-bottom: 5px;">Выбор кокса</p>
                                 <select name="selectedCocks" class="custom-select">
-                                    <option selected>Выбор кокса</option>
-
                                     @{
                                         System.Reflection.PropertyInfo[] cocks = typeof(CocksModel).GetProperties();
 
@@ -305,16 +303,16 @@
                                     <input class="form-control" name="[${rowCount}].Smelt_Temperature" type="text" value=@Model[Model.Count - 1].Smelt_Temperature>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[${rowCount}].CO_Percentage" type="text" value=@Model[Model.Count - 1].CO_Percentage>
+                                    <input class="form-control gas-content" name="[${rowCount}].CO_Percentage" type="text" value=@Model[Model.Count - 1].CO_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[${rowCount}].CO2_Percentage" type="text" value=@Model[Model.Count - 1].CO2_Percentage>
+                                    <input class="form-control gas-content" name="[${rowCount}].CO2_Percentage" type="text" value=@Model[Model.Count - 1].CO2_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[${rowCount}].N2_Percentage" type="text" value=@Model[Model.Count - 1].N2_Percentage>
+                                    <input class="form-control gas-content" name="[${rowCount}].N2_Percentage" type="text" value=@Model[Model.Count - 1].N2_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[${rowCount}].O2_Percentage" type="text" value=@Model[Model.Count - 1].O2_Percentage>
+                                    <input class="form-control gas-content" name="[${rowCount}].O2_Percentage" type="text" value=@Model[Model.Count - 1].O2_Percentage>
                                 </td>
 
                                 @* РАСХОД МАТЕРИАЛОВ *@
@@ -397,16 +395,16 @@
                                     <input class="form-control" name="[${rowCount}].Smelt_Temperature" type="text" value=@Model[Model.Count - 1].Smelt_Temperature>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[${rowCount}].CO_Percentage" type="text" value=@Model[Model.Count - 1].CO_Percentage>
+                                    <input class="form-control gas-content" name="[${rowCount}].CO_Percentage" type="text" value=@Model[Model.Count - 1].CO_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[${rowCount}].CO2_Percentage" type="text" value=@Model[Model.Count - 1].CO2_Percentage>
+                                    <input class="form-control gas-content" name="[${rowCount}].CO2_Percentage" type="text" value=@Model[Model.Count - 1].CO2_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[${rowCount}].N2_Percentage" type="text" value=@Model[Model.Count - 1].N2_Percentage>
+                                    <input class="form-control gas-content" name="[${rowCount}].N2_Percentage" type="text" value=@Model[Model.Count - 1].N2_Percentage>
                                 </td>
                                 <td>
-                                    <input class="form-control" name="[${rowCount}].O2_Percentage" type="text" value=@Model[Model.Count - 1].O2_Percentage>
+                                    <input class="form-control gas-content" name="[${rowCount}].O2_Percentage" type="text" value=@Model[Model.Count - 1].O2_Percentage>
                                 </td>
 
                                 @* РАСХОД МАТЕРИАЛОВ *@

@@ -32,11 +32,62 @@ $(document).ready(function () {
                 $(".table").addClass("overflow-y");
             }
         })
+
+        $("#AddRow").click(function () {
+            let lastTrowInputs = $('#table tr:last').find(".gas-content");;
+
+            let summ = 0;
+
+            for (let i = 0; i < lastTrowInputs.length; i++) {
+                let value = lastTrowInputs.eq(i).val().replace(',', '.');
+                summ += parseFloat(value);
+            }
+
+            let summFixed = summ.toFixed(9) == 100;
+
+            if (!summFixed) {
+                lastTrowInputs.removeClass("is-valid");
+                lastTrowInputs.addClass("is-invalid");
+            } else {
+                lastTrowInputs.removeClass("is-invalid");
+                lastTrowInputs.addClass("is-valid");
+            }
+
+            BlockResultButton(!summFixed);
+        })
     }
 
-    Test();
+    inputsValidate();
 
-    function Test() {
+    function inputsValidate() {
+
+        for (let i = 0; i < $("#table tbody tr td input").length; i++) {
+            let inputs = $("#table tbody tr td input").eq(i);
+            let value = parseFloat(inputs.val().replace(',', '.'));
+
+            if (value < 0) {
+                inputs.addClass("invalid")
+            }
+        }
+
+        $("#table tbody tr td input").keyup(function () {
+            this.value = this.value.replace(/[^0-9\.,-]/g, '');
+
+            let input = $(this);
+            let value = parseFloat(input.val().replace(',', '.'));
+
+            if (value < 0) {
+                input.addClass("is-invalid");
+                BlockResultButton(true);
+            } else {
+                input.removeClass("is-invalid");
+                BlockResultButton(false);
+            }
+        })
+
+        $(".table-modal tbody tr td input").keyup(function () {
+            this.value = this.value.replace(/[^0-9\.,-]/g, '');
+        })
 
         for (let i = 0; i < $(".gas-content").length; i++) {
             let gasContentInputs = $(".gas-content").eq(i).parent("td").parent("tr").find(".gas-content");
@@ -62,7 +113,6 @@ $(document).ready(function () {
                 BlockResultButton(!summFixed);
             }
         }
-
 
         $(".gas-content").keyup(function () {
 
@@ -93,17 +143,6 @@ $(document).ready(function () {
         $("#Calculate").prop("disabled", parameter);
     }
 
-    //for (let i = 0; i < $(".table").length; i++) {
-    //    let tableID = "#" + $(".table").eq(i).attr("id");
-
-    //    console.log(tableID);
-
-    //    SetEvenClassOnTable(tableID);
-    //}
-
-    //for (let i = 0) {
-
-    //}
 
     SetEvenClassOnTable("#table");
     SetEvenClassOnTable("#gas-table");
@@ -197,8 +236,8 @@ $(document).ready(function () {
             $(".material-balance-coming-heading").text("Материальный баланс (приход), кг/ч");
             $(".material-balance-consumption-heading").text("Материальный баланс (расход), кг/ч");
 
-            $(".heat-balance-coming-heading").text("Тепловой баланс (приход), кг/ч");
-            $(".heat-balance-consumption-heading").text("Тепловой баланс (расход), кг/ч");
+            $(".heat-balance-coming-heading").text("Тепловой баланс (приход), кДж");
+            $(".heat-balance-consumption-heading").text("Тепловой баланс (расход), кДж");
 
             $(".table-balance-tonn").addClass("table-hide");
             $(".table-balance-hour").removeClass("table-hide");
@@ -209,8 +248,8 @@ $(document).ready(function () {
             $(".material-balance-coming-heading").text("Материальный баланс (приход), кг/т");
             $(".material-balance-consumption-heading").text("Материальный баланс (расход), кг/т");
 
-            $(".heat-balance-coming-heading").text("Тепловой баланс (приход), кг/т");
-            $(".heat-balance-consumption-heading").text("Тепловой баланс (приход), кг/т");
+            $(".heat-balance-coming-heading").text("Тепловой баланс (приход), кДж/т");
+            $(".heat-balance-consumption-heading").text("Тепловой баланс (расход), кДж/т");
 
             $(".table-balance-hour").addClass("table-hide");
             $(".table-balance-tonn").removeClass("table-hide");

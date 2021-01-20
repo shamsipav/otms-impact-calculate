@@ -132,6 +132,10 @@ html {
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
 }
 
+.table-modal tbody input {
+    width: 100px;
+}
+
 /* Result CSS */
 .table-result {
     width: fit-content;
@@ -157,6 +161,7 @@ html {
     display: none;
 }
 
-.graphic-content {
+.graphic {
     width: 500px;
+    /*height: 500px;*/
 }
