@@ -46,21 +46,33 @@ $(document).ready(function () {
     SetEvenClassOnTable("#gas-device-difference-table");
     SetEvenClassOnTable("#heat-content-table");
 
-    SetEvenClassOnTable("#material-balance-coming-table");
+    
+    //SetEvenClassOnTable("#material-balance-coming-table");
 
+    // Материальный баланс (приход)
     SetEvenClassOnTable("#material-balance-coming-table-hour");
     SetEvenClassOnTable("#material-balance-coming-table-tonn");
+    SetEvenClassOnTable("#material-balance-coming-table-percent");
 
-    SetEvenClassOnTable("#material-balance-coming-table-percent-hour");
-
+    // Материальный баланс (расход)
     SetEvenClassOnTable("#material-balance-consumption-table-hour");
     SetEvenClassOnTable("#material-balance-consumption-table-tonn");
-    //SetEvenClassOnTable("#material-balance-consumption-table-percent");
+    SetEvenClassOnTable("#material-balance-consumption-table-percent");
 
     SetEvenClassOnTable("#w-table");
 
-    SetEvenClassOnTable("#heat-balance-coming-table");
-    SetEvenClassOnTable("#heat-balance-consumption-table");
+    // Тепловой баланс (приход)
+    SetEvenClassOnTable("#heat-balance-coming-table-hour");
+    SetEvenClassOnTable("#heat-balance-coming-table-tonn");
+    SetEvenClassOnTable("#heat-balance-coming-table-percent");
+
+
+    // Материальный баланс (расход)
+    SetEvenClassOnTable("#heat-balance-consumption-table-hour");
+    SetEvenClassOnTable("#heat-balance-consumption-table-tonn");
+    SetEvenClassOnTable("#heat-balance-consumption-table-percent");
+
+
     SetEvenClassOnTable("#oxides-percent-table");
 
     function SetEvenClassOnTable(table) {
@@ -109,25 +121,36 @@ $(document).ready(function () {
     let kiloPerHour = true;
 
     $("#balanceConfigure").click(function () {
-        console.log("click")
+
+        percent = false;
         kiloPerHour = !kiloPerHour;
 
         $(".table-result").scrollTop(0);
 
         if (kiloPerHour) {
-            $("#balanceConfigure").text("Показать на тонну расплава");
+            $("#balanceConfigure").text("Показать на тонну");
             $(".material-balance-coming-heading").text("Материальный баланс (приход), кг/ч");
             $(".material-balance-consumption-heading").text("Материальный баланс (расход), кг/ч");
 
+            $(".heat-balance-coming-heading").text("Тепловой баланс (приход), кг/ч");
+            $(".heat-balance-consumption-heading").text("Тепловой баланс (расход), кг/ч");
+
             $(".table-balance-tonn").addClass("table-hide");
             $(".table-balance-hour").removeClass("table-hide");
+
+            $(".table-balance-percent").addClass("table-hide");
         } else {
             $("#balanceConfigure").text("Показать в час");
             $(".material-balance-coming-heading").text("Материальный баланс (приход), кг/т");
             $(".material-balance-consumption-heading").text("Материальный баланс (расход), кг/т");
 
+            $(".heat-balance-coming-heading").text("Тепловой баланс (приход), кг/т");
+            $(".heat-balance-consumption-heading").text("Тепловой баланс (приход), кг/т");
+
             $(".table-balance-hour").addClass("table-hide");
             $(".table-balance-tonn").removeClass("table-hide");
+
+            $(".table-balance-percent").addClass("table-hide");
         }
     });
 
@@ -137,18 +160,47 @@ $(document).ready(function () {
 
     $("#percent").click(function () {
 
+        $(".table-result").scrollTop(0);
+
         percent = !percent;
 
         if (percent) {
-            $(".material-balance-coming-heading").text("Материальный баланс (приход), % (кг/ч)");
+            $(".material-balance-coming-heading").text("Материальный баланс (приход), %");
+            $(".material-balance-consumption-heading").text("Материальный баланс (расход), %");
+
+            $(".heat-balance-coming-heading").text("Тепловой баланс (приход), %");
+            $(".heat-balance-consumption-heading").text("Тепловой баланс (расход), %");
 
             $(".table-balance-tonn").addClass("table-hide");
             $(".table-balance-hour").addClass("table-hide");
 
             // тут получаеца не надо "на час" надо просто у таблицы процента убрать hide окс (и получаеца что таблиц % не 2 а 1 на каждую жыжу)
-            $(".table-balance-percent-hour").removeClass("table-hide");
+            $(".table-balance-percent").removeClass("table-hide");
         } else {
 
+            $(".table-balance-percent").addClass("table-hide");
+
+            if (kiloPerHour) {
+                //$("#balanceConfigure").text("Показать на тонну расплава");
+                $(".material-balance-coming-heading").text("Материальный баланс (приход), кг/ч");
+                $(".material-balance-consumption-heading").text("Материальный баланс (расход), кг/ч");
+
+                $(".heat-balance-coming-heading").text("Тепловой баланс (приход), кг/ч");
+                $(".heat-balance-consumption-heading").text("Тепловой баланс (расход), кг/ч");
+
+                $(".table-balance-tonn").addClass("table-hide");
+                $(".table-balance-hour").removeClass("table-hide");
+            } else {
+                //$("#balanceConfigure").text("Показать в час");
+                $(".material-balance-coming-heading").text("Материальный баланс (приход), кг/т");
+                $(".material-balance-consumption-heading").text("Материальный баланс (расход), кг/т");
+
+                $(".heat-balance-coming-heading").text("Тепловой баланс (приход), кг/т");
+                $(".heat-balance-consumption-heading").text("Тепловой баланс (расход), кг/т");
+
+                $(".table-balance-hour").addClass("table-hide");
+                $(".table-balance-tonn").removeClass("table-hide");
+            }
         }
     });
 
