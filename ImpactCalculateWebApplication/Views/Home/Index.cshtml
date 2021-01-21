@@ -1,6 +1,5 @@
 ﻿@model List<InputDataModel>
 @{ ViewData["Title"] = "Home Page";
-    int id = IndexViewModel.LastID;
 }
 
 
@@ -174,7 +173,7 @@
                         <tr>
 
                             @{
-                                Model[i].ID = i;
+                                //Model[i].ID = i;
                                 if (i % 12 == 0)
                                 {
                                     <td rowspan="12">@(i / 12 + 1)</td>

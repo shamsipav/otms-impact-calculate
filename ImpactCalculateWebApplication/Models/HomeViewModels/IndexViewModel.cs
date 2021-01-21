@@ -9,7 +9,6 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
 
     public class IndexViewModel
     {
-        public static int LastID = 1;
         public Cocks selectedCocks = CocksModel.Kemerovo_3_4;
 
         public const double qAir = 1.293d;
