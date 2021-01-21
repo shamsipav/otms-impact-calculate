@@ -275,6 +275,4 @@ namespace ImpactCalculateWebApplication.Models.HomeViewModels
             public string data_Json;
         }
     }
-
-
 }
