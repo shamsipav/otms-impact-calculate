@@ -13,6 +13,10 @@ $(document).ready(function () {
     AddNewShift();
     inputsValidate();
 
+    $("#tableFull").click(function () {
+        $("#table").toggleClass("overflow-y");
+    });
+
     function GetSizeOfTable() {
         let rowCount = $('#table tbody tr').length;
 
@@ -54,6 +58,45 @@ $(document).ready(function () {
                 lastTrowInputs.addClass("is-valid");
             }
 
+            $("#table tr:last input").keyup(function () {
+                this.value = this.value.replace(/[^0-9\.,-]/g, '');
+
+                let input = $(this);
+                let value = parseFloat(input.val().replace(',', '.'));
+
+                if (value < 0) {
+                    input.addClass("is-invalid");
+                    BlockResultButton(true);
+                } else {
+                    input.removeClass("is-invalid");
+                    BlockResultButton(false);
+                }
+            })
+
+            $(".gas-content").keyup(function () {
+
+                let gasContentInputs = $(this).parent("td").parent("tr").find(".gas-content");
+
+                let summ = 0;
+
+                for (let i = 0; i < gasContentInputs.length; i++) {
+                    let value = gasContentInputs.eq(i).val().replace(',', '.');
+                    summ += parseFloat(value);
+                }
+
+                let summFixed = summ.toFixed(9) == 100;
+
+                if (!summFixed) {
+                    gasContentInputs.removeClass("is-valid");
+                    gasContentInputs.addClass("is-invalid");
+                } else {
+                    gasContentInputs.removeClass("is-invalid");
+                    gasContentInputs.addClass("is-valid");
+                }
+
+                BlockResultButton(!summFixed);
+            })
+
             BlockResultButton(!summFixed);
         })
     }
@@ -85,7 +128,7 @@ $(document).ready(function () {
         })
 
         $(".table-modal tbody tr td input").keyup(function () {
-            this.value = this.value.replace(/[^0-9\.,-]/g, '');
+            this.value = this.value.replace(/[^0-9\.,]/g, '');
         })
 
         for (let i = 0; i < $(".gas-content").length; i++) {
